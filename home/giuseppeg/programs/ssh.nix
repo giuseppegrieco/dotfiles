@@ -5,9 +5,13 @@
 
   programs.ssh = {
     enable = true;
-    addKeysToAgent = "yes";
+    enableDefaultConfig = true;
 
-    matchBlocks = {
+    settings = {
+      "*" = {
+        AddKeysToAgent = "yes";
+      };
+
       "github.com" = {
         hostname = "github.com";
         user = "git";

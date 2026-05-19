@@ -1,0 +1,20 @@
+{ config, pkgs, ... }:
+
+{
+  programs.kitty = {
+    enable = true;
+    settings = {
+      font_family = "JetBrainsMono Nerd Font";
+      bold_font = "auto";
+      italic_font = "auto";
+      bold_italic_font = "auto";
+      font_size = "12.0";
+
+      window_padding_width = 10;
+      background_opacity = "0.95";
+      confirm_os_window_close = 0;
+
+      tab_bar_style = "powerline";
+    };
+  };
+}

@@ -29,6 +29,8 @@
       ll = "ls -lh --color=auto --group-directories-first";
 
       snvim = "SUDO_EDITOR=\$(which nvim) sudoedit";
+      spush = "sudo GIT_SSH_COMMAND='ssh -i /home/giuseppeg/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git push";
+      spull = "sudo GIT_SSH_COMMAND='ssh -i /home/giuseppeg/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git pull";
     };
   };
 }

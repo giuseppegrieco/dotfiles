@@ -16,12 +16,15 @@
   imports = [
     ./programs/direnv.nix
     ./programs/dunst.nix
+    ./programs/git.nix
     ./programs/firefox.nix
     ./programs/hyprland.nix
     ./programs/kitty.nix
+    ./programs/nvim.nix
     ./programs/rofi.nix
     ./programs/ssh.nix
     ./programs/starship.nix
+    ./programs/tmux.nix
     ./programs/vscode.nix
     ./programs/waybar.nix
     ./programs/zsh.nix
@@ -31,6 +34,7 @@
     DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";
     BROWSER = "${pkgs.firefox}/bin/firefox";
     NIXOS_OZONE_WL = "1";
+    NIXPKGS_ALLOW_UNFREE = "1";
   };
 
   xdg.mimeApps = {
@@ -46,9 +50,6 @@
   };
 
   home.packages = with pkgs; [
-    neovim
-    bat
-
     nerd-fonts.jetbrains-mono
     nixfmt
     nixd
@@ -62,6 +63,7 @@
     gdb
     clang-tools
 
+    bat
     fzf
     ripgrep
     fd

@@ -6,35 +6,15 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  # Enable the Polkit service
-  # security.polkit.enable = true;
-
-  # # Create a systemd user service to automatically start the GNOME authentication agent inside Hyprland
-  # systemd.user.services.polkit-gnome-authentication-agent-1 = {
-  #   description = "polkit-gnome-authentication-agent-1";
-  #   wantedBy = [ "graphical-session.target" ];
-  #   wants = [ "graphical-session.target" ];
-  #   after = [ "graphical-session.target" ];
-  #   serviceConfig = {
-  #     Type = "simple";
-  #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-  #     Restart = "on-failure";
-  #     RestartSec = 1;
-  #     TimeoutStopSec = 10;
-  #   };
-  # };
-
   swapDevices = [ { device = "/var/lib/swapfile"; size = 4096; } ];
 
-  # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "mac-vm"; # Define your hostname.
+  networking.hostName = "mac-vm";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -72,7 +52,7 @@
 
   virtualisation.docker.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account.
   users.users.giuseppeg = {
     isNormalUser = true;
     description = "Giuseppe Grieco";

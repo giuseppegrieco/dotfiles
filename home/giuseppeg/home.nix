@@ -55,7 +55,6 @@
     libnotify
 
     gimp
-    libreoffice-fresh
 
     valgrind
     strace
@@ -69,29 +68,24 @@
     btop
     nmap
 
-    nautilus
-    pavucontrol
-    pamixer
-    polkit_gnome
-
     grim
     slurp
     swappy
     wl-clipboard
 
-    python3
-    go
-    gopls
-    delve
-    gcc
-    gnumake
+#    python3
+#    go
+#    gopls
+#    delve
+#    gcc
+#    gnumake
 
-    terraform
-    kubernetes-helm
-    kubectl
-    jq
-    k9s
-    docker-compose
+#    terraform
+#    kubernetes-helm
+#    kubectl
+#    jq
+#    k9s
+#    docker-compose
 
     catppuccin-cursors.mochaMauve
 

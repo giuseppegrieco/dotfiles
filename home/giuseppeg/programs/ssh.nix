@@ -5,11 +5,12 @@
 
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = true;
+    enableDefaultConfig = false;
 
     settings = {
       "*" = {
         AddKeysToAgent = "yes";
+	SendEnv = [ "LANG" "LC_*" ];
       };
 
       "github.com" = {

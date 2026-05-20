@@ -22,11 +22,13 @@
     ];
 
     shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake .#nixos";
+      rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#\$(hostname)";
       ncg = "nix-collect-garbage -d";
 
       ls = "ls --color=auto --group-directories-first";
       ll = "ls -lh --color=auto --group-directories-first";
+
+      snvim = "SUDO_EDITOR=\$(which nvim) sudoedit";
     };
   };
 }

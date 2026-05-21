@@ -9,7 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    catppuccin.url = "github:catppuccin/nix";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -17,7 +20,7 @@
       self,
       nixpkgs,
       home-manager,
-      catppuccin,
+      stylix,
       ...
     }@inputs:
     {
@@ -36,7 +39,7 @@
               home-manager.users.giuseppeg = {
                 imports = [
                   ./home/giuseppeg/home.nix
-                  catppuccin.homeModules.catppuccin
+                  stylix.homeModules.stylix
                 ];
               };
             }

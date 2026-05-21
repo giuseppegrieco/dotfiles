@@ -1,8 +1,29 @@
 { config, pkgs, ... }:
 
 {
-  catppuccin.flavor = "mocha";
-  catppuccin.enable = true;
+  stylix = {
+    enable = true;
+    polarity = "dark";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-medium.yaml";
+
+    cursor = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Classic";
+      size = 24;
+    };
+
+    fonts = {
+      monospace = {
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
+      };
+    };
+
+    # Style for Hyprland borders/cursor and the Waybar CSS are created
+    # referencing the generated palette via config.lib.stylix.colors.
+    targets.hyprland.enable = false;
+    targets.waybar.enable = false;
+  };
 
   home.username = "giuseppeg";
   home.homeDirectory = "/home/giuseppeg";
@@ -95,8 +116,6 @@
 #    jq
 #    k9s
 #    docker-compose
-
-    catppuccin-cursors.mochaMauve
 
     opencode
   ];

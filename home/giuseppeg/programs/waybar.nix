@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  c = config.lib.stylix.colors.withHashtag;
+in
 {
   programs.waybar = {
     enable = true;
@@ -83,7 +86,7 @@
 
       window#waybar {
         background: transparent;
-        color: @text;
+        color: ${c.base05};
       }
 
       #workspaces {
@@ -92,20 +95,20 @@
       }
 
       #workspaces button {
-        color: @surface2;
+        color: ${c.base03};
         border-bottom: 3px solid transparent;
         background: transparent;
       }
 
       #workspaces button.active {
-        color: @blue;
+        color: ${c.base0D};
         background: transparent;
-        border-bottom: 3px solid @blue;
+        border-bottom: 3px solid ${c.base0D};
       }
 
       #workspaces button:hover {
-        color: @text;
-        background: alpha(@surface0, 0.5);
+        color: ${c.base05};
+        background: alpha(${c.base02}, 0.5);
       }
 
       #clock, #cpu, #memory, #network, #battery, #tray {
@@ -114,37 +117,37 @@
       }
 
       #cpu {
-        color: @teal;
-        border-bottom: 3px solid @teal;
+        color: ${c.base0C};
+        border-bottom: 3px solid ${c.base0C};
       }
 
       #memory {
-        color: @mauve;
-        border-bottom: 3px solid @mauve;
+        color: ${c.base0E};
+        border-bottom: 3px solid ${c.base0E};
       }
 
       #network {
-        color: @sapphire;
-        border-bottom: 3px solid @sapphire;
+        color: ${c.base0D};
+        border-bottom: 3px solid ${c.base0D};
       }
 
       #battery {
-        color: @green;
-        border-bottom: 3px solid @green;
+        color: ${c.base0B};
+        border-bottom: 3px solid ${c.base0B};
       }
 
       #clock {
-        color: @blue;
-        border-bottom: 3px solid @blue;
+        color: ${c.base0D};
+        border-bottom: 3px solid ${c.base0D};
         margin-bottom: 4px;
       }
 
       #battery.charging {
-        color: @green;
+        color: ${c.base0B};
       }
 
       #battery.warning:not(.charging) {
-        color: @red;
+        color: ${c.base08};
       }
     '';
   };

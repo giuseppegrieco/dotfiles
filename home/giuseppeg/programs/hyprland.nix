@@ -23,9 +23,7 @@ in
       "$menu" = "rofi -show drun -show-icons";
 
       env = [
-        "HYPRCURSOR_THEME,catppuccin-mocha-mauve-cursors"
-        "HYPRCURSOR_SIZE,24"
-        "XCURSOR_THEME,catppuccin-mocha-mauve-cursors"
+        "XCURSOR_THEME,Bibata-Modern-Classic"
         "XCURSOR_SIZE,24"
       ];
 
@@ -33,8 +31,8 @@ in
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "$lavender $sapphire 45deg";
-        "col.inactive_border" = "$surface0";
+        "col.active_border" = "rgb(${config.lib.stylix.colors.base0D}) rgb(${config.lib.stylix.colors.base0C}) 45deg";
+        "col.inactive_border" = "rgb(${config.lib.stylix.colors.base02})";
         layout = "dwindle";
       };
 

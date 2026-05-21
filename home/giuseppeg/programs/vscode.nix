@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   programs.vscode = {
@@ -15,7 +15,7 @@
       ];
 
       userSettings = {
-        "editor.fontFamily" = "'JetBrainsMono Nerd Font', 'monospace', monospace";
+        "editor.fontFamily" = lib.mkForce "'JetBrainsMono Nerd Font', 'monospace', monospace";
         "editor.fontLigatures" = true;
 
         "files.autoSave" = "afterDelay";

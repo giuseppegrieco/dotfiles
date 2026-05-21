@@ -12,17 +12,23 @@
       size = 24;
     };
 
-    fonts = {
-      monospace = {
-        package = pkgs.nerd-fonts.jetbrains-mono;
-        name = "JetBrainsMono Nerd Font";
+    # Drive every app's font from here so Stylix is the single definer
+    # (avoids per-app font conflicts). JetBrainsMono everywhere.
+    fonts =
+      let
+        jetbrains = {
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font";
+        };
+      in
+      {
+        monospace = jetbrains;
+        sansSerif = jetbrains;
+        serif = jetbrains;
       };
-    };
 
-    # Style for Hyprland borders/cursor and the Waybar CSS are created
-    # referencing the generated palette via config.lib.stylix.colors.
-    targets.hyprland.enable = false;
-    targets.waybar.enable = false;
+    # Firefox theming needs the profile name declared explicitly.
+    targets.firefox.profileNames = [ "giuseppeg" ];
   };
 
   home.username = "giuseppeg";
@@ -79,11 +85,11 @@
 
     gimp
 
-#    valgrind
-#    strace
-#    ltrace
-#    gdb
-#    clang-tools
+    #    valgrind
+    #    strace
+    #    ltrace
+    #    gdb
+    #    clang-tools
 
     yazi
     bat
@@ -93,29 +99,29 @@
     btop
     nmap
 
-#    nautilus
-#    pavucontrol
-#    pamixer
-#    polkit_gnome
+    #    nautilus
+    #    pavucontrol
+    #    pamixer
+    #    polkit_gnome
 
     grim
     slurp
     swappy
     wl-clipboard
 
-#    python3
-#    go
-#    gopls
-#    delve
-#    gcc
-#    gnumake
+    #    python3
+    #    go
+    #    gopls
+    #    delve
+    #    gcc
+    #    gnumake
 
-#    terraform
-#    kubernetes-helm
-#    kubectl
-#    jq
-#    k9s
-#    docker-compose
+    #    terraform
+    #    kubernetes-helm
+    #    kubectl
+    #    jq
+    #    k9s
+    #    docker-compose
 
     opencode
   ];

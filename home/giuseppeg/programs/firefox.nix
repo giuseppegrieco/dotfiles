@@ -37,8 +37,8 @@
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
         "sidebar.position_start" = true;
-        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;"
-        layout.css.prefers-color-scheme.content-override" = 2; 
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+        "layout.css.prefers-color-scheme.content-override" = 2;
         "ui.systemUsesDarkTheme" = 1;
       };
 

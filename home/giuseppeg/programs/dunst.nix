@@ -19,8 +19,7 @@
         text_icon_padding = 10;
         gap_size = 6;
 
-        # Typography & layout
-        font = "JetBrainsMono Nerd Font 10";
+        # Typography & layout (font is set globally by Stylix)
         format = "<b>%s</b>\n%b";
         transparency = 10;
         notification_limit = 5;

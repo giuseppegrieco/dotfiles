@@ -31,8 +31,7 @@ in
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        "col.active_border" = "rgb(${config.lib.stylix.colors.base0D}) rgb(${config.lib.stylix.colors.base0C}) 45deg";
-        "col.inactive_border" = "rgb(${config.lib.stylix.colors.base02})";
+        # Border colors are set by Stylix's hyprland target.
         layout = "dwindle";
       };
 

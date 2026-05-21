@@ -4,8 +4,6 @@
   programs.rofi = {
     enable = true;
 
-    font = "JetBrainsMono Nerd Font";
-
     extraConfig = {
       modi = "drun,run,window";
       show-icons = true;

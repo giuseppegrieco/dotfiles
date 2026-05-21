@@ -16,6 +16,7 @@ in
     settings = {
       "exec-once" = [
         "waybar"
+	      "systemctl --user start hyprpolkitagent"
       ];
       "$mod" = "SUPER";
       "$terminal" = "kitty";

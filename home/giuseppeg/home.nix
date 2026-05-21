@@ -50,6 +50,9 @@
   };
 
   home.packages = with pkgs; [
+    hyprpolkitagent
+    neovim
+
     nerd-fonts.jetbrains-mono
     nixfmt
     nixd
@@ -57,18 +60,24 @@
 
     gimp
 
-    valgrind
-    strace
-    ltrace
-    gdb
-    clang-tools
+#    valgrind
+#    strace
+#    ltrace
+#    gdb
+#    clang-tools
 
+    yazi
     bat
     fzf
     ripgrep
     fd
     btop
     nmap
+
+#    nautilus
+#    pavucontrol
+#    pamixer
+#    polkit_gnome
 
     grim
     slurp

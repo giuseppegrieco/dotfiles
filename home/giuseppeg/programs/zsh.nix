@@ -26,7 +26,7 @@
       ncg = "nix-collect-garbage -d";
 
       ls = "ls --color=auto --group-directories-first";
-      ll = "ls -lh --color=auto --group-directories-first";
+      ll = "yazi";
 
       snvim = "SUDO_EDITOR=\$(which nvim) sudoedit";
       spush = "sudo GIT_SSH_COMMAND='ssh -i /home/giuseppeg/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git push";

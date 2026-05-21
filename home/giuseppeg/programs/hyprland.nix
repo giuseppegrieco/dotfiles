@@ -110,6 +110,8 @@ in
         "$mod SHIFT, R, exec, hyprctl reload"
         "$mod SHIFT, M, exit"
         "$mod, C, killactive"
+
+        "$mod, ESCAPE, exec, hyprlock"
       ];
     };
   };

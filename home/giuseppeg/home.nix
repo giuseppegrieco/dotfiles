@@ -47,6 +47,7 @@
     ./programs/direnv.nix
     ./programs/dunst.nix
     ./programs/git.nix
+    ./programs/hyprlock.nix
     ./programs/firefox.nix
     ./programs/hyprland.nix
     ./programs/kitty.nix
@@ -88,11 +89,11 @@
 
     gimp
 
-    #    valgrind
-    #    strace
-    #    ltrace
-    #    gdb
-    #    clang-tools
+    valgrind
+    trace
+    ltrace
+    gdb
+    clang-tools
 
     yazi
     bat
@@ -101,6 +102,7 @@
     fd
     btop
     nmap
+    fastfetch
 
     #    nautilus
     #    pavucontrol

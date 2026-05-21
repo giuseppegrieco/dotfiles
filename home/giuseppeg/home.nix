@@ -90,7 +90,7 @@
     gimp
 
     valgrind
-    trace
+    strace
     ltrace
     gdb
     clang-tools

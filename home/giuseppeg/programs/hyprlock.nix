@@ -11,27 +11,25 @@
         disable_loading_bar = true;
       };
 
-      # Colors come from Stylix's hyprlock target; we only set layout here.
-      background = [
-        {
-          blur_passes = 3;
-          blur_size = 8;
-          noise = 1.0e-2;
-        }
-      ];
+      # Colors/path come from Stylix's hyprlock target, which defines
+      # `background` and `input-field` as attrsets; we use attrsets here too
+      # so our layout settings merge with Stylix's colors instead of clashing.
+      background = {
+        blur_passes = 3;
+        blur_size = 8;
+        noise = 1.0e-2;
+      };
 
-      input-field = [
-        {
-          size = "300, 50";
-          position = "0, -80";
-          halign = "center";
-          valign = "center";
-          outline_thickness = 2;
-          rounding = 0;
-          placeholder_text = "<i>Password...</i>";
-          fade_on_empty = false;
-        }
-      ];
+      input-field = {
+        size = "300, 50";
+        position = "0, -80";
+        halign = "center";
+        valign = "center";
+        outline_thickness = 2;
+        rounding = 0;
+        placeholder_text = "<i>Password...</i>";
+        fade_on_empty = false;
+      };
 
       label = [
         # Clock

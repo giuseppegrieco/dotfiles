@@ -50,10 +50,8 @@
   };
 
   home.packages = with pkgs; [
-    hyprpolkitagent
-    neovim
-
     nerd-fonts.jetbrains-mono
+    hyprpolkitagent
     nixfmt
     nixd
     libnotify

@@ -24,13 +24,13 @@ in
         ];
         modules-center = [ "clock" ];
         modules-right = [
-          "idle_inhibitor"
           "cpu"
           "memory"
           "network"
-          "bluetooth"
           "pulseaudio"
           "battery"
+          "bluetooth"
+          "idle_inhibitor"
           "tray"
         ];
 

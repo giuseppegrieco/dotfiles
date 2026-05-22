@@ -90,6 +90,9 @@
     libnotify
 
     gimp
+    rnote
+    discord
+    obs-studio
 
     valgrind
     strace

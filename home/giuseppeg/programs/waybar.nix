@@ -19,7 +19,7 @@ in
         margin-left = 12;
         margin-right = 12;
         modules-left = [
-          "hyprland/workspaces"
+          "group/ws"
           "mpris"
         ];
         modules-center = [ "clock" ];
@@ -33,6 +33,20 @@ in
           "idle_inhibitor"
           "tray"
         ];
+
+        # NixOS logo + workspace dots packed into one pill.
+        "group/ws" = {
+          orientation = "horizontal";
+          modules = [
+            "custom/logo"
+            "hyprland/workspaces"
+          ];
+        };
+
+        "custom/logo" = {
+          format = "";
+          tooltip = false;
+        };
 
         "hyprland/workspaces" = {
           disable-scroll = true;
@@ -178,10 +192,9 @@ in
       }
 
       /* Inset the leftmost/rightmost modules from the bar's rounded edges. */
-      .modules-left  { margin-left: 8px; }
-      .modules-right { margin-right: 8px; }
+      .modules-left  { margin-left: 6px; }
+      .modules-right { margin-right: 6px; }
 
-      #workspaces,
       #clock,
       #mpris, #idle_inhibitor,
       #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
@@ -192,7 +205,22 @@ in
         border-radius: 10px;
       }
 
-      #workspaces { padding: 0 4px; border-color: ${base0D}; }
+      /* Workspaces group = one pill holding the NixOS logo block + the dots. */
+      #ws {
+        background: ${base01};
+        margin: 8px 4px;
+        border: 2px solid ${base0D};
+        border-radius: 10px;
+      }
+      #ws #workspaces { background: transparent; border: none; margin: 0; padding: 0 6px; }
+      /* Logo block: cyan fill, glyph in bar-bg, left corners rounded to the pill. */
+      #custom-logo {
+        background: ${base0D};
+        color: ${base00};
+        padding: 0 9px;
+        border-radius: 8px 0 0 8px;
+      }
+
       #workspaces button {
         padding: 0;
         margin: 6px 4px;

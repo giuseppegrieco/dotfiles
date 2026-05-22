@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   savePath = "~/Pictures/Screenshots/screenshot_$(date +%Y%m%d_%H%M%S).png";
@@ -31,7 +31,8 @@ in
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        # Border colors are set by Stylix's hyprland target.
+        # Override Stylix's hyprland target: red active border instead of cyan.
+        "col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base08})";
         layout = "dwindle";
       };
 

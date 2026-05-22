@@ -161,8 +161,10 @@
       }
 
       window#waybar {
-        background: transparent;
+        background: ${base00};
         color: ${base05};
+        border: 2px solid ${base08};
+        border-radius: 12px;
       }
 
       #workspaces,

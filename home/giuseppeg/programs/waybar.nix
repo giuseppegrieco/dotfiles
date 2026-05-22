@@ -41,12 +41,13 @@
 
         cpu = {
           format = "CPU: {usage}%";
-          tooltip = false;
-          on-click = "kitty --class float-btop -e btop";
+          # tooltip = false;
+          on-click = "kitty -e btop";
         };
 
         memory = {
           format = "RAM: {percentage}%";
+	  on-click = "kitty -e btop";
         };
 
         network = {

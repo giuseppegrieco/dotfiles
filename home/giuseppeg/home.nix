@@ -29,6 +29,8 @@
 
     # Firefox theming needs the profile name declared explicitly.
     targets.firefox.profileNames = [ "giuseppeg" ];
+
+    targets.waybar.enable = false;
     overlays.enable = false;
   };
 
@@ -104,10 +106,9 @@
     nmap
     fastfetch
 
-    #    nautilus
-    #    pavucontrol
-    #    pamixer
-    #    polkit_gnome
+    pavucontrol
+    pamixer
+    blueman
 
     grim
     slurp

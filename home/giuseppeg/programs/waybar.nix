@@ -15,6 +15,8 @@
           "cpu"
           "memory"
           "network"
+          "bluetooth"
+          "pulseaudio"
           "battery"
           "tray"
         ];
@@ -69,7 +71,91 @@
             ""
           ];
         };
+
+        pulseaudio = {
+          format = "{icon}  {volume}%";
+          "format-muted" = "󰝟  muted";
+          "format-icons" = {
+            default = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
+            headphone = "󰋋";
+            headset = "󰋎";
+          };
+          "scroll-step" = 5;
+          on-click = "pamixer -t";
+          "on-click-right" = "pavucontrol";
+          "tooltip-format" = "{desc}  {volume}%";
+        };
+
+        bluetooth = {
+          format = "󰂯";
+          "format-disabled" = "󰂲";
+          "format-off" = "󰂲";
+          "format-connected" = "󰂱 {device_alias}";
+          on-click = "blueman-manager";
+          "tooltip-format" = "{controller_alias}\t{controller_address}";
+          "tooltip-format-connected" = "{device_enumerate}";
+        };
       };
     };
+
+    style = with config.lib.stylix.colors.withHashtag; ''
+      * {
+        font-family: "${config.stylix.fonts.monospace.name}";
+        font-size: 13px;
+        min-height: 0;
+        border: none;
+        border-radius: 0;
+      }
+
+      window#waybar {
+        background: ${base00};
+        color: ${base05};
+      }
+
+      /* shared pill look */
+      #clock,
+      #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
+        background: ${base01};
+        padding: 0 12px;
+        margin: 4px 3px;
+        border-radius: 10px;
+      }
+
+      /* workspaces */
+      #workspaces { margin: 4px 3px; }
+      #workspaces button {
+        padding: 0 9px;
+        color: ${base04};
+        background: ${base01};
+        border-radius: 8px;
+        margin: 0 2px;
+      }
+      #workspaces button.active  { background: ${base0D}; color: ${base00}; }
+      #workspaces button.urgent  { background: ${base08}; color: ${base00}; }
+      #workspaces button:hover   { background: ${base02}; color: ${base05}; }
+
+      /* center */
+      #clock      { color: ${base0A}; }   /* yellow */
+
+      /* right cluster — one accent each */
+      #cpu        { color: ${base0B}; }   /* green  */
+      #memory     { color: ${base0C}; }   /* aqua   */
+      #network    { color: ${base0D}; }   /* blue   */
+      #bluetooth  { color: ${base0D}; }   /* blue   */
+      #pulseaudio { color: ${base09}; }   /* orange */
+      #battery    { color: ${base0E}; }   /* purple */
+
+      #battery.warning  { color: ${base0A}; }
+      #battery.critical { color: ${base08}; }
+      #battery.charging { color: ${base0B}; }
+
+      #pulseaudio.muted     { color: ${base03}; }
+      #bluetooth.disabled,
+      #bluetooth.off        { color: ${base03}; }
+    '';
   };
 }

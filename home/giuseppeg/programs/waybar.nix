@@ -7,7 +7,7 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 30;
+        height = 38;
         spacing = 4;
         margin-top = 6;
         margin-left = 12;
@@ -165,7 +165,6 @@
         color: ${base05};
         border: 2px solid ${base08};
         border-radius: 12px;
-        padding: 4px 6px;
       }
 
       #workspaces,
@@ -173,13 +172,13 @@
       #mpris, #idle_inhibitor,
       #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
         background: ${base01};
-        padding: 0 8px;
-        margin: 4px 3px 0;
+        padding: 0 6px;
+        margin: 5px 4px;
         border: 2px solid ${base01};
         border-radius: 10px;
       }
 
-      #workspaces { padding: 0 6px; border-color: ${base0D}; }
+      #workspaces { padding: 0 4px; border-color: ${base0D}; }
       #workspaces button {
         padding: 0;
         margin: 6px 4px;

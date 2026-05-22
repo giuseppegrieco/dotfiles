@@ -217,7 +217,7 @@ in
       #custom-logo {
         background: ${base0D};
         color: ${base00};
-        padding: 0 9px;
+        padding: 0 11px 0 7px;
         border-radius: 8px 0 0 8px;
       }
 

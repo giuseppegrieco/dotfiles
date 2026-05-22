@@ -164,7 +164,7 @@
         background: ${base00};
         color: ${base05};
         border: 2px solid ${base08};
-        border-radius: 12px;
+        padding: 4px 6px;
       }
 
       #workspaces,
@@ -174,16 +174,15 @@
         background: ${base01};
         padding: 0 8px;
         margin: 4px 3px 0;
-        border-radius: 10px;
+        border: 2px solid ${base01};
       }
 
-      #workspaces { padding: 0 6px; }
+      #workspaces { padding: 0 6px; border-color: ${base0D}; }
       #workspaces button {
         padding: 0;
         margin: 6px 4px;
         min-width: 14px;
         min-height: 14px;
-        border-radius: 50%;
         color: transparent;
         background: ${base03};
       }
@@ -191,25 +190,25 @@
       #workspaces button.urgent  { background: ${base08}; }
       #workspaces button:hover   { background: ${base05}; }
 
-      #clock      { color: ${base0A}; }
-      #cpu        { color: ${base0B}; }
-      #memory     { color: ${base0C}; }
-      #network    { color: ${base0D}; }
-      #bluetooth  { color: ${base0D}; }
-      #pulseaudio { color: ${base09}; }
-      #battery    { color: ${base0E}; }
+      #clock      { color: ${base0A}; border-color: ${base0A}; }
+      #cpu        { color: ${base0B}; border-color: ${base0B}; }
+      #memory     { color: ${base0C}; border-color: ${base0C}; }
+      #network    { color: ${base0D}; border-color: ${base0D}; }
+      #bluetooth  { color: ${base0D}; border-color: ${base0D}; }
+      #pulseaudio { color: ${base09}; border-color: ${base09}; }
+      #battery    { color: ${base0E}; border-color: ${base0E}; }
 
-      #battery.warning  { color: ${base0A}; }
-      #battery.critical { color: ${base08}; }
-      #battery.charging { color: ${base0B}; }
+      #battery.warning  { color: ${base0A}; border-color: ${base0A}; }
+      #battery.critical { color: ${base08}; border-color: ${base08}; }
+      #battery.charging { color: ${base0B}; border-color: ${base0B}; }
 
-      #pulseaudio.muted     { color: ${base03}; }
+      #pulseaudio.muted     { color: ${base03}; border-color: ${base03}; }
       #bluetooth.disabled,
-      #bluetooth.off        { color: ${base03}; }
+      #bluetooth.off        { color: ${base03}; border-color: ${base03}; }
 
-      #mpris          { color: ${base05}; }
-      #idle_inhibitor { color: ${base0A}; }
-      #idle_inhibitor.activated { color: ${base0B}; }
+      #mpris          { color: ${base05}; border-color: ${base05}; }
+      #idle_inhibitor { color: ${base0A}; border-color: ${base0A}; }
+      #idle_inhibitor.activated { color: ${base0B}; border-color: ${base0B}; }
 
       #clock, #network, #bluetooth, #pulseaudio, #idle_inhibitor, #mpris, #cpu, #memory {
         transition: background-color 0.2s ease, color 0.2s ease;

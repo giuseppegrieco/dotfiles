@@ -130,9 +130,9 @@
       #bluetooth,
       #idle_inhibitor,
       #tray {
-        background-color: ${base01};
+        background-color: ${base00};
         color: ${base05};
-        border: 2px solid ${base03};
+        border: 2px solid ${base01};
         padding: 0 6px;
         margin: 0;
       }
@@ -140,13 +140,13 @@
       #workspaces { padding: 0; }
       #workspaces button {
         color: ${base05};
-        background-color: ${base01};
+        background-color: ${base00};
         padding: 0 8px;
         border-radius: 0;
         transition: background-color 120ms ease, color 120ms ease;
       }
-      #workspaces button.active { background-color: ${base02}; color: ${base0A}; }
-      #workspaces button:hover  { background-color: ${base03}; color: ${base00}; }
+      #workspaces button.active { background-color: ${base01}; color: ${base0A}; }
+      #workspaces button:hover  { background-color: ${base02}; color: ${base00}; }
       #workspaces button.urgent { background-color: ${base08}; color: ${base00}; }
 
       #clock { color: ${base0A}; }

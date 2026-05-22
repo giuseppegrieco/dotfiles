@@ -130,13 +130,13 @@
       #clock,
       #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
         background: ${base01};
-        padding: 0 12px;
+        padding: 0 8px;
         margin: 4px 3px;
         border-radius: 10px;
       }
 
       /* workspaces as circles (no labels) */
-      #workspaces { padding: 0 10px; }
+      #workspaces { padding: 0 6px; }
       #workspaces button {
         padding: 0;
         /* vertical margin shrinks the button to match its width -> true circle */

@@ -13,18 +13,27 @@
     };
 
     # Drive every app's font from here so Stylix is the single definer
-    # (avoids per-app font conflicts). JetBrainsMono everywhere.
+    # (avoids per-app font conflicts). JetBrainsMono for code/terminals,
+    # Inter for proportional UI text.
     fonts =
       let
         jetbrains = {
           package = pkgs.nerd-fonts.jetbrains-mono;
           name = "JetBrainsMono Nerd Font";
         };
+        inter = {
+          package = pkgs.inter;
+          name = "Inter";
+        };
+        notoSerif = {
+          package = pkgs.noto-fonts;
+          name = "Noto Serif";
+        };
       in
       {
         monospace = jetbrains;
-        sansSerif = jetbrains;
-        serif = jetbrains;
+        sansSerif = inter;
+        serif = notoSerif;
       };
 
     # Firefox theming needs the profile name declared explicitly.

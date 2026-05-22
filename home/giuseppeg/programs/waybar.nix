@@ -173,7 +173,8 @@ in
 
     style = with config.lib.stylix.colors.withHashtag; ''
       * {
-        font-family: "${config.stylix.fonts.monospace.name}";
+        /* Inter for text, JetBrainsMono Nerd Font as fallback for icon glyphs. */
+        font-family: "${config.stylix.fonts.sansSerif.name}", "${config.stylix.fonts.monospace.name}";
         font-size: 13px;
         min-height: 0;
         border: none;

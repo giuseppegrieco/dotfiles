@@ -8,8 +8,13 @@
     withRuby = false;
     withPython3 = false;
 
-    extraPackages = with pkgs; [ ];
+    extraPackages = with pkgs; [
+      gcc # nvim-treesitter / native plugins compile at runtime
+    ];
   };
 
-  # xdf.configFile."nvim".source = ./nvim;
+  xdg.configFile."nvim" = {
+    source = ./nvim;
+    recursive = true;
+  };
 }

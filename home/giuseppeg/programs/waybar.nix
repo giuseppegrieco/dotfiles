@@ -19,7 +19,8 @@
         modules-center = [ "clock" ];
         modules-right = [
           "idle_inhibitor"
-          "group/stats"
+          "cpu"
+          "memory"
           "network"
           "bluetooth"
           "pulseaudio"
@@ -42,19 +43,6 @@
         clock = {
           format = "{:%H:%M  |  %a, %d %b}";
           "tooltip-format" = "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>";
-        };
-
-        "group/stats" = {
-          orientation = "horizontal";
-          drawer = {
-            transition-duration = 300;
-            children-class = "stat";
-            transition-left-to-right = true;
-          };
-          modules = [
-            "cpu"
-            "memory"
-          ];
         };
 
         cpu = {
@@ -225,7 +213,7 @@
         transition: background-color 0.2s ease, color 0.2s ease;
       }
       #clock:hover, #network:hover, #bluetooth:hover, #pulseaudio:hover,
-      #idle_inhibitor:hover, #mpris:hover, #cpu:hover {
+      #idle_inhibitor:hover, #mpris:hover, #cpu:hover, #memory:hover {
         background: ${base02};
       }
     '';

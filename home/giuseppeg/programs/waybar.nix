@@ -7,59 +7,33 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 44;
-        spacing = 4;
-        margin-top = 6;
-        margin-left = 12;
-        margin-right = 12;
+        # Thin bar, modules packed tight so their borders merge into one
+        # connected segmented strip (Darkblue-breakcore style).
+        height = 24;
+        spacing = -2;
+        margin-top = 4;
+        margin-left = 6;
+        margin-right = 6;
         modules-left = [
-          "group/ws"
-          "mpris"
+          "hyprland/workspaces"
         ];
         modules-center = [ "clock" ];
         modules-right = [
+          "network"
+          "pulseaudio"
           "cpu"
           "memory"
-          "pulseaudio"
-          "tray"
           "battery"
-          "group/status"
+          "bluetooth"
+          "idle_inhibitor"
+          "tray"
         ];
-
-        # NixOS logo + workspace dots packed into one pill.
-        "group/ws" = {
-          orientation = "horizontal";
-          modules = [
-            "custom/logo"
-            "hyprland/workspaces"
-          ];
-        };
-
-        # Network + bluetooth + keep-awake packed into one pill.
-        "group/status" = {
-          orientation = "horizontal";
-          modules = [
-            "network"
-            "bluetooth"
-            "idle_inhibitor"
-          ];
-        };
-
-        "custom/logo" = {
-          format = "";
-          tooltip = false;
-        };
 
         "hyprland/workspaces" = {
           disable-scroll = true;
           all-outputs = true;
           on-click = "activate";
-          format = "{icon}";
-          "format-icons" = {
-            default = "";
-            active = "";
-            urgent = "";
-          };
+          format = "{name}";
         };
 
         clock = {
@@ -68,63 +42,31 @@
         };
 
         cpu = {
-          format = "󰻠 {usage}%";
+          format = "CPU: {usage}%";
           tooltip = false;
           on-click = "kitty --class float-btop -e btop";
         };
 
         memory = {
-          format = "󰍛 {percentage}%";
-        };
-
-        idle_inhibitor = {
-          format = "{icon}";
-          "format-icons" = {
-            activated = "󰅶";
-            deactivated = "󰾪";
-          };
-          "tooltip-format-activated" = "keep awake: on";
-          "tooltip-format-deactivated" = "keep awake: off";
-        };
-
-        mpris = {
-          format = "{player_icon} {dynamic}";
-          "format-paused" = "{status_icon} {dynamic}";
-          "dynamic-len" = 30;
-          "dynamic-order" = [
-            "title"
-            "artist"
-          ];
-          "player-icons" = {
-            default = "▶";
-            spotify = "󰓇";
-            firefox = "󰈹";
-            chromium = "󰊯";
-            mpv = "";
-            vlc = "󰕼";
-          };
-          "status-icons" = {
-            paused = "⏸";
-          };
-          on-click = "playerctl play-pause";
-          "on-click-right" = "playerctl next";
-          "on-scroll-up" = "playerctl volume 0.05+";
-          "on-scroll-down" = "playerctl volume 0.05-";
-          "tooltip-format" = "{title} — {artist}";
-        };
-
-        tray = {
-          "icon-size" = 18;
-          spacing = 10;
+          format = "RAM: {percentage}%";
         };
 
         network = {
-          format-wifi = "󰖩 {essid}";
-          format-ethernet = "󰈀 Ethernet";
-          format-linked = "󰈀 (No IP)";
-          format-disconnected = "󰖪 Disconnected";
-          tooltip-format = "{ifname} via {gwaddr} ";
+          format-wifi = "NET: connected";
+          format-ethernet = "NET: connected";
+          format-linked = "NET: connected";
+          format-disconnected = "NET: disconnected";
+          tooltip-format = "{ifname} via {gwaddr}";
           on-click = "kitty --class float-network -e nmtui";
+        };
+
+        pulseaudio = {
+          format = "VOL: {volume}%";
+          "format-muted" = "VOL: muted";
+          "scroll-step" = 5;
+          on-click = "pamixer -t";
+          "on-click-right" = "pavucontrol";
+          "tooltip-format" = "{desc}  {volume}%";
         };
 
         battery = {
@@ -132,45 +74,96 @@
             warning = 30;
             critical = 15;
           };
-          format = "{capacity}% {icon}";
-          "format-charging" = "{capacity}% ";
-          "format-icons" = [
-            ""
-            ""
-            ""
-            ""
-            ""
-          ];
-        };
-
-        pulseaudio = {
-          format = "{icon} {volume}%";
-          "format-muted" = "󰝟 muted";
-          "format-icons" = {
-            default = [
-              "󰕿"
-              "󰖀"
-              "󰕾"
-            ];
-            headphone = "󰋋";
-            headset = "󰋎";
-          };
-          "scroll-step" = 5;
-          on-click = "pamixer -t";
-          "on-click-right" = "pavucontrol";
-          "tooltip-format" = "{desc}  {volume}%";
+          format = "BAT: {capacity}%";
+          "format-charging" = "BAT: {capacity}% +";
+          "tooltip-format" = "{timeTo}";
         };
 
         bluetooth = {
-          format = "󰂯";
-          "format-disabled" = "󰂲";
-          "format-off" = "󰂲";
-          "format-connected" = "󰂱 {device_alias}";
+          format = "BT: on";
+          "format-disabled" = "BT: off";
+          "format-off" = "BT: off";
+          "format-connected" = "BT: on";
           on-click = "blueman-manager";
           "tooltip-format" = "{controller_alias}\t{controller_address}";
           "tooltip-format-connected" = "{device_enumerate}";
         };
+
+        idle_inhibitor = {
+          format = "{icon}";
+          "format-icons" = {
+            activated = "WAKE";
+            deactivated = "AUTO";
+          };
+          "tooltip-format-activated" = "keep awake: on";
+          "tooltip-format-deactivated" = "keep awake: off";
+        };
+
+        tray = {
+          "icon-size" = 16;
+          spacing = 8;
+        };
       };
     };
+
+    style = with config.lib.stylix.colors.withHashtag; ''
+      * {
+        font-family: "${config.stylix.fonts.monospace.name}";
+        font-size: 13px;
+        font-weight: 500;
+        min-height: 0;
+        border: none;
+        border-radius: 0;
+      }
+
+      window#waybar {
+        background-color: ${base00};
+        color: ${base05};
+      }
+
+      /* Segmented boxes: shared border + dark fill, square corners. With the
+         bar's negative spacing, adjacent 2px borders overlap into one line. */
+      #workspaces,
+      #clock,
+      #network,
+      #pulseaudio,
+      #cpu,
+      #memory,
+      #battery,
+      #bluetooth,
+      #idle_inhibitor,
+      #tray {
+        background-color: ${base01};
+        color: ${base05};
+        border: 2px solid ${base03};
+        padding: 0 6px;
+        margin: 0;
+      }
+
+      /* Workspaces: the container is a box, each workspace a flat cell. */
+      #workspaces { padding: 0; }
+      #workspaces button {
+        color: ${base05};
+        background-color: ${base01};
+        padding: 0 8px;
+        border-radius: 0;
+        transition: background-color 120ms ease, color 120ms ease;
+      }
+      #workspaces button.active { background-color: ${base02}; color: ${base0A}; }
+      #workspaces button:hover  { background-color: ${base03}; color: ${base00}; }
+      #workspaces button.urgent { background-color: ${base08}; color: ${base00}; }
+
+      #clock { color: ${base0A}; }
+
+      #battery.warning  { color: ${base0A}; }
+      #battery.critical { color: ${base08}; }
+      #battery.charging { color: ${base0B}; }
+
+      #pulseaudio.muted { color: ${base03}; }
+      #bluetooth.disabled,
+      #bluetooth.off    { color: ${base03}; }
+
+      #idle_inhibitor.activated { color: ${base0B}; }
+    '';
   };
 }

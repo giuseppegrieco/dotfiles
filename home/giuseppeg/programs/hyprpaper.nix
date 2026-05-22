@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  wallpaper = ../wallpaper.png;
+  wallpaper = ../wallpaper.jpg;
 in
 {
   services.hyprpaper = {

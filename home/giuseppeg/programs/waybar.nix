@@ -224,9 +224,9 @@ in
 
       #workspaces button {
         padding: 0;
-        margin: 6px 4px;
-        min-width: 14px;
-        min-height: 14px;
+        margin: 4px 4px;
+        min-width: 16px;
+        min-height: 16px;
         border-radius: 50%;
         color: transparent;
         background: ${base03};

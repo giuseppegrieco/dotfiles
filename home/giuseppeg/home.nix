@@ -52,6 +52,7 @@
     ./programs/hyprlock.nix
     ./programs/firefox.nix
     ./programs/hyprland.nix
+    ./programs/hyprpaper.nix
     ./programs/kitty.nix
     ./programs/nvim.nix
     ./programs/rofi.nix

@@ -95,6 +95,8 @@
     rnote
     discord
     obs-studio
+    slack
+    spotify
 
     valgrind
     strace

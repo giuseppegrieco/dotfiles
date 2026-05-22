@@ -136,14 +136,11 @@
       }
 
       /* workspaces as circles (no labels) */
-      #workspaces { padding: 0 10px; }
+      #workspaces { padding: 5px; }
       #workspaces button {
-        padding: 0;
-        /* vertical margin shrinks the button to match its width -> true circle */
-        margin: 6px 4px;
-        min-width: 14px;
-        min-height: 14px;
-        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+        border-radius: 100%;
         color: transparent;
         background: ${base03};
       }

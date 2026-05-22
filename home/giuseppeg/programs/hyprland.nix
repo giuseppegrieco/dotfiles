@@ -36,6 +36,10 @@ in
         layout = "dwindle";
       };
 
+      decoration = {
+        rounding = 10;
+      };
+
       input = {
         kb_layout = "us";
         follow_mouse = 1;

@@ -164,6 +164,7 @@
         background: ${base00};
         color: ${base05};
         border: 2px solid ${base08};
+        border-radius: 12px;
         padding: 4px 6px;
       }
 
@@ -175,6 +176,7 @@
         padding: 0 8px;
         margin: 4px 3px 0;
         border: 2px solid ${base01};
+        border-radius: 10px;
       }
 
       #workspaces { padding: 0 6px; border-color: ${base0D}; }
@@ -183,6 +185,7 @@
         margin: 6px 4px;
         min-width: 14px;
         min-height: 14px;
+        border-radius: 50%;
         color: transparent;
         background: ${base03};
       }

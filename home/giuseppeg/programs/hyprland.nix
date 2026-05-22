@@ -16,7 +16,7 @@ in
     settings = {
       "exec-once" = [
         "waybar"
-	      "systemctl --user start hyprpolkitagent"
+        "systemctl --user start hyprpolkitagent"
       ];
       "$mod" = "SUPER";
       "$terminal" = "kitty";
@@ -103,9 +103,17 @@ in
         "$mod SHIFT, E, exec, ${editShot}"
         "$mod ALT, E, exec, ${copyShot}"
 
-        ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-        ", XF86AudioLowerVolume, exec, pamixer -d 5"
-        ", XF86AudioMute, exec, pamixer -t"
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
+
+        ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise"
+        ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower"
+
+        ", XF86AudioPlay, exec, playerctl play-pause"
+        ", XF86AudioNext, exec, playerctl next"
+        ", XF86AudioPrev, exec, playerctl previous"
 
         "$mod SHIFT, R, exec, hyprctl reload"
         "$mod SHIFT, M, exit"

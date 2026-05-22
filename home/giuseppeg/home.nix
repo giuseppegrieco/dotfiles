@@ -57,6 +57,7 @@
     ./programs/rofi.nix
     ./programs/ssh.nix
     ./programs/starship.nix
+    ./programs/swayosd.nix
     ./programs/tmux.nix
     ./programs/vscode.nix
     ./programs/waybar.nix
@@ -112,6 +113,8 @@
     pavucontrol
     pamixer
     blueman
+    playerctl
+    brightnessctl
 
     grim
     slurp

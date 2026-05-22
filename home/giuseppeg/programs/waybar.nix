@@ -12,11 +12,14 @@
         margin-top = 6;
         margin-left = 12;
         margin-right = 12;
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [
+          "hyprland/workspaces"
+          "mpris"
+        ];
         modules-center = [ "clock" ];
         modules-right = [
-          "cpu"
-          "memory"
+          "idle_inhibitor"
+          "group/stats"
           "network"
           "bluetooth"
           "pulseaudio"
@@ -41,6 +44,19 @@
           "tooltip-format" = "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>";
         };
 
+        "group/stats" = {
+          orientation = "horizontal";
+          drawer = {
+            transition-duration = 300;
+            children-class = "stat";
+            transition-left-to-right = true;
+          };
+          modules = [
+            "cpu"
+            "memory"
+          ];
+        };
+
         cpu = {
           format = "CPU {usage}%";
           tooltip = false;
@@ -48,6 +64,42 @@
 
         memory = {
           format = "RAM {}%";
+        };
+
+        idle_inhibitor = {
+          format = "{icon}";
+          "format-icons" = {
+            activated = "󰅶";
+            deactivated = "󰾪";
+          };
+          "tooltip-format-activated" = "keep awake: on";
+          "tooltip-format-deactivated" = "keep awake: off";
+        };
+
+        mpris = {
+          format = "{player_icon} {dynamic}";
+          "format-paused" = "{status_icon} {dynamic}";
+          "dynamic-len" = 30;
+          "dynamic-order" = [
+            "title"
+            "artist"
+          ];
+          "player-icons" = {
+            default = "▶";
+            spotify = "󰓇";
+            firefox = "󰈹";
+            chromium = "󰊯";
+            mpv = "";
+            vlc = "󰕼";
+          };
+          "status-icons" = {
+            paused = "⏸";
+          };
+          on-click = "playerctl play-pause";
+          "on-click-right" = "playerctl next";
+          "on-scroll-up" = "playerctl volume 0.05+";
+          "on-scroll-down" = "playerctl volume 0.05-";
+          "tooltip-format" = "{title} — {artist}";
         };
 
         tray = {
@@ -126,6 +178,7 @@
 
       #workspaces,
       #clock,
+      #mpris, #idle_inhibitor,
       #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
         background: ${base01};
         padding: 0 8px;
@@ -162,6 +215,18 @@
       #pulseaudio.muted     { color: ${base03}; }
       #bluetooth.disabled,
       #bluetooth.off        { color: ${base03}; }
+
+      #mpris          { color: ${base05}; }
+      #idle_inhibitor { color: ${base0A}; }
+      #idle_inhibitor.activated { color: ${base0B}; }
+
+      #clock, #network, #bluetooth, #pulseaudio, #idle_inhibitor, #mpris, #cpu, #memory {
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+      #clock:hover, #network:hover, #bluetooth:hover, #pulseaudio:hover,
+      #idle_inhibitor:hover, #mpris:hover, #cpu:hover {
+        background: ${base02};
+      }
     '';
   };
 }

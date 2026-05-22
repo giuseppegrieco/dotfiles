@@ -25,7 +25,7 @@ in
       # Force the VM display to the Mac's native panel resolution.
       # Empty name = applies to whatever output the VM exposes.
       monitor = [
-        ",3456x2234@60,0x0,1"
+        ",1920x1080@60,0x0,1"
       ];
 
       env = [

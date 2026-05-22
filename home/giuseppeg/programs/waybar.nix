@@ -138,8 +138,8 @@
       /* workspaces as circles (no labels) */
       #workspaces { padding: 5px; }
       #workspaces button {
-        width: 14px;
-        height: 14px;
+        min-width: 14px;
+        min-height: 14px;
         border-radius: 100%;
         color: transparent;
         background: ${base03};

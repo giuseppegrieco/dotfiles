@@ -7,7 +7,7 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 34;
+        height = 30;
         spacing = 4;
         margin-top = 6;
         margin-left = 12;
@@ -119,27 +119,23 @@
         border-radius: 0;
       }
 
-      /* transparent bar so the modules float as pills */
       window#waybar {
         background: transparent;
         color: ${base05};
       }
 
-      /* shared pill look */
       #workspaces,
       #clock,
       #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
         background: ${base01};
         padding: 0 8px;
-        margin: 4px 3px;
+        margin: 4px 3px 0;
         border-radius: 10px;
       }
 
-      /* workspaces as circles (no labels) */
       #workspaces { padding: 0 6px; }
       #workspaces button {
         padding: 0;
-        /* vertical margin shrinks the button to match its width -> true circle */
         margin: 6px 4px;
         min-width: 14px;
         min-height: 14px;
@@ -151,16 +147,13 @@
       #workspaces button.urgent  { background: ${base08}; }
       #workspaces button:hover   { background: ${base05}; }
 
-      /* center */
-      #clock      { color: ${base0A}; }   /* yellow */
-
-      /* right cluster — one accent each */
-      #cpu        { color: ${base0B}; }   /* green  */
-      #memory     { color: ${base0C}; }   /* aqua   */
-      #network    { color: ${base0D}; }   /* blue   */
-      #bluetooth  { color: ${base0D}; }   /* blue   */
-      #pulseaudio { color: ${base09}; }   /* orange */
-      #battery    { color: ${base0E}; }   /* purple */
+      #clock      { color: ${base0A}; }
+      #cpu        { color: ${base0B}; }
+      #memory     { color: ${base0C}; }
+      #network    { color: ${base0D}; }
+      #bluetooth  { color: ${base0D}; }
+      #pulseaudio { color: ${base09}; }
+      #battery    { color: ${base0E}; }
 
       #battery.warning  { color: ${base0A}; }
       #battery.critical { color: ${base08}; }

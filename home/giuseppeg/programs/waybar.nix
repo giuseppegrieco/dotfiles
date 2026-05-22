@@ -2,8 +2,9 @@
 
 let
   c = config.lib.stylix.colors.withHashtag;
-  # Icon as a filled badge: accent background, bar-bg colored glyph.
-  badge = color: icon: "<span background='${color}' foreground='${c.base00}'> ${icon} </span>";
+  # Glyph painted in the bar-bg colour; the coloured block behind it is the
+  # module's own background (set in CSS) so it fills the pill and follows its radius.
+  badge = icon: "<span foreground='${c.base00}'> ${icon} </span>";
 in
 {
   programs.waybar = {
@@ -51,13 +52,13 @@ in
         };
 
         cpu = {
-          format = "${badge c.base0B ""} {usage}%";
+          format = "${badge "󰻠"} {usage}%";
           tooltip = false;
           on-click = "kitty --class float-btop -e btop";
         };
 
         memory = {
-          format = "${badge c.base0C "󰍛"} {percentage}%";
+          format = "${badge "󰍛"} {percentage}%";
         };
 
         idle_inhibitor = {
@@ -102,10 +103,10 @@ in
         };
 
         network = {
-          format-wifi = "${badge c.base0D "󰖩"} {essid}";
-          format-ethernet = "${badge c.base0D "󰈀"} Ethernet";
-          format-linked = "${badge c.base0D "󰈀"} (No IP)";
-          format-disconnected = "${badge c.base08 "󰖪"} Disconnected";
+          format-wifi = "${badge "󰖩"} {essid}";
+          format-ethernet = "${badge "󰈀"} Ethernet";
+          format-linked = "${badge "󰈀"} (No IP)";
+          format-disconnected = "${badge "󰖪"} Disconnected";
           tooltip-format = "{ifname} via {gwaddr} ";
           on-click = "kitty --class float-network -e nmtui";
         };
@@ -127,8 +128,8 @@ in
         };
 
         pulseaudio = {
-          format = "${badge c.base09 "{icon}"} {volume}%";
-          "format-muted" = "${badge c.base03 "󰝟"} muted";
+          format = "${badge "{icon}"} {volume}%";
+          "format-muted" = "${badge "󰝟"} muted";
           "format-icons" = {
             default = [
               "󰕿"
@@ -176,6 +177,10 @@ in
         border-radius: 12px;
       }
 
+      /* Inset the leftmost/rightmost modules from the bar's rounded edges. */
+      .modules-left  { margin-left: 8px; }
+      .modules-right { margin-right: 8px; }
+
       #workspaces,
       #clock,
       #mpris, #idle_inhibitor,
@@ -201,12 +206,28 @@ in
       #workspaces button.urgent  { background: ${base08}; }
       #workspaces button:hover   { background: ${base05}; }
 
-      #clock      { color: ${base0A}; border-color: ${base01}; }
-      #cpu        { color: ${base0B}; border-color: ${base0B}; }
-      #memory     { color: ${base0C}; border-color: ${base0C}; }
-      #network    { color: ${base0D}; border-color: ${base0D}; }
+      /* No pill behind the clock — just the text. */
+      #clock { color: ${base0A}; background: transparent; border-color: transparent; }
+
+      /* Hard-stop gradient: left ~1.9em is the accent icon block (flush to the
+         pill's top/left/bottom and clipped to its radius), the rest is base01. */
+      #cpu {
+        color: ${base0B}; border-color: ${base0B}; padding-left: 0;
+        background-image: linear-gradient(to right, ${base0B} 1.9em, ${base01} 1.9em);
+      }
+      #memory {
+        color: ${base0C}; border-color: ${base0C}; padding-left: 0;
+        background-image: linear-gradient(to right, ${base0C} 1.9em, ${base01} 1.9em);
+      }
+      #network {
+        color: ${base0D}; border-color: ${base0D}; padding-left: 0;
+        background-image: linear-gradient(to right, ${base0D} 1.9em, ${base01} 1.9em);
+      }
+      #pulseaudio {
+        color: ${base09}; border-color: ${base09}; padding-left: 0;
+        background-image: linear-gradient(to right, ${base09} 1.9em, ${base01} 1.9em);
+      }
       #bluetooth  { color: ${base0D}; border-color: ${base0D}; }
-      #pulseaudio { color: ${base09}; border-color: ${base09}; }
       #battery    { color: ${base0E}; border-color: ${base0E}; }
 
       #battery.warning  { color: ${base0A}; border-color: ${base0A}; }
@@ -221,11 +242,10 @@ in
       #idle_inhibitor { color: ${base0A}; border-color: ${base0A}; }
       #idle_inhibitor.activated { color: ${base0B}; border-color: ${base0B}; }
 
-      #clock, #network, #bluetooth, #pulseaudio, #idle_inhibitor, #mpris, #cpu, #memory {
+      #bluetooth, #idle_inhibitor, #mpris {
         transition: background-color 0.2s ease, color 0.2s ease;
       }
-      #clock:hover, #network:hover, #bluetooth:hover, #pulseaudio:hover,
-      #idle_inhibitor:hover, #mpris:hover, #cpu:hover, #memory:hover {
+      #bluetooth:hover, #idle_inhibitor:hover, #mpris:hover {
         background: ${base02};
       }
     '';

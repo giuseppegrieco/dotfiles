@@ -60,6 +60,7 @@
         cpu = {
           format = "CPU {usage}%";
           tooltip = false;
+          on-click = "kitty --class float-btop -e btop";
         };
 
         memory = {

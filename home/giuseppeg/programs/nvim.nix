@@ -8,7 +8,7 @@
     withRuby = false;
     withPython3 = false;
 
-    extraPackages = with pkgs; [];
+    extraPackages = with pkgs; [ ];
   };
 
   # xdf.configFile."nvim".source = ./nvim;

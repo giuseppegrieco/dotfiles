@@ -10,7 +10,6 @@ in
       ipc = "on";
       splash = false;
       preload = [ "${wallpaper}" ];
-      # "," = apply to all monitors.
       wallpaper = [ ",${wallpaper}" ];
     };
   };

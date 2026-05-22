@@ -11,7 +11,7 @@
       name = "Bibata-Modern-Classic";
       size = 24;
     };
-    
+
     fonts =
       let
         jetbrains = {
@@ -36,7 +36,6 @@
     # Firefox theming needs the profile name declared explicitly.
     targets.firefox.profileNames = [ "giuseppeg" ];
 
-    # Waybar uses a custom segmented-box style (programs/waybar.nix).
     targets.waybar.enable = false;
     overlays.enable = false;
   };

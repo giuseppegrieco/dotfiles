@@ -22,12 +22,6 @@ in
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun -show-icons";
 
-      # Force the VM display to the Mac's native panel resolution.
-      # Empty name = applies to whatever output the VM exposes.
-      monitor = [
-        ",1920x1080@60,0x0,1"
-      ];
-
       env = [
         "XCURSOR_THEME,Bibata-Modern-Classic"
         "XCURSOR_SIZE,24"

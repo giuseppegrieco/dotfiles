@@ -7,8 +7,6 @@
       mainBar = {
         layer = "top";
         position = "top";
-        # Thin bar, modules packed tight so their borders merge into one
-        # connected segmented strip (Darkblue-breakcore style).
         height = 24;
         spacing = -2;
         margin-top = 10;
@@ -121,8 +119,6 @@
         color: ${base05};
       }
 
-      /* Segmented boxes: shared border + dark fill, square corners. With the
-         bar's negative spacing, adjacent 2px borders overlap into one line. */
       #workspaces,
       #clock,
       #network,
@@ -140,7 +136,6 @@
         margin: 0;
       }
 
-      /* Workspaces: the container is a box, each workspace a flat cell. */
       #workspaces { padding: 0; }
       #workspaces button {
         color: ${base05};

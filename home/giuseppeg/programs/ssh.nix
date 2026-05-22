@@ -10,7 +10,10 @@
     settings = {
       "*" = {
         AddKeysToAgent = "yes";
-	SendEnv = [ "LANG" "LC_*" ];
+        SendEnv = [
+          "LANG"
+          "LC_*"
+        ];
       };
 
       "github.com" = {
@@ -21,4 +24,3 @@
     };
   };
 }
-

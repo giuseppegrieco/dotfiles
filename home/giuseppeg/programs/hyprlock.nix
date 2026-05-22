@@ -11,9 +11,6 @@
         disable_loading_bar = true;
       };
 
-      # Colors/path come from Stylix's hyprlock target, which defines
-      # `background` and `input-field` as attrsets; we use attrsets here too
-      # so our layout settings merge with Stylix's colors instead of clashing.
       background = {
         blur_passes = 3;
         blur_size = 8;

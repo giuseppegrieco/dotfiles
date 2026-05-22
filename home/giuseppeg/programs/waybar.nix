@@ -9,6 +9,9 @@
         position = "top";
         height = 34;
         spacing = 4;
+        margin-top = 6;
+        margin-left = 12;
+        margin-right = 12;
         modules-left = [ "hyprland/workspaces" ];
         modules-center = [ "clock" ];
         modules-right = [
@@ -25,7 +28,12 @@
           disable-scroll = true;
           all-outputs = true;
           on-click = "activate";
-          format = "{name}";
+          format = "{icon}";
+          "format-icons" = {
+            default = "";
+            active = "";
+            urgent = "";
+          };
         };
 
         clock = {
@@ -111,12 +119,14 @@
         border-radius: 0;
       }
 
+      /* transparent bar so the modules float as pills */
       window#waybar {
-        background: ${base00};
+        background: transparent;
         color: ${base05};
       }
 
       /* shared pill look */
+      #workspaces,
       #clock,
       #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
         background: ${base01};
@@ -125,18 +135,20 @@
         border-radius: 10px;
       }
 
-      /* workspaces */
-      #workspaces { margin: 4px 3px; }
+      /* workspaces as circles (no labels) */
+      #workspaces { padding: 0 8px; }
       #workspaces button {
-        padding: 0 9px;
-        color: ${base04};
-        background: ${base01};
-        border-radius: 8px;
-        margin: 0 2px;
+        padding: 0;
+        margin: 0 4px;
+        min-width: 12px;
+        min-height: 12px;
+        border-radius: 50%;
+        color: transparent;
+        background: ${base03};
       }
-      #workspaces button.active  { background: ${base0D}; color: ${base00}; }
-      #workspaces button.urgent  { background: ${base08}; color: ${base00}; }
-      #workspaces button:hover   { background: ${base02}; color: ${base05}; }
+      #workspaces button.active  { background: ${base0D}; }
+      #workspaces button.urgent  { background: ${base08}; }
+      #workspaces button:hover   { background: ${base05}; }
 
       /* center */
       #clock      { color: ${base0A}; }   /* yellow */

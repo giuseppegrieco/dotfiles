@@ -8,13 +8,13 @@
     withRuby = false;
     withPython3 = false;
 
-    extraPackages = with pkgs; [
-      gcc # nvim-treesitter / native plugins compile at runtime
-    ];
+    extraPackages = with pkgs; [ ];
+
+    initLua = ''
+      require("config.remap")
+      require("config.lazy")
+    '';
   };
 
-  xdg.configFile."nvim" = {
-    source = ./nvim;
-    recursive = true;
-  };
+  xdg.configFile."nvim/lua".source = ./nvim;
 }

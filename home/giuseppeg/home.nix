@@ -128,11 +128,11 @@
     swappy
     wl-clipboard
 
+    gcc
     #    python3
     #    go
     #    gopls
     #    delve
-    #    gcc
     #    gnumake
 
     #    terraform

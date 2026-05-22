@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 let
   savePath = "~/Pictures/Screenshots/screenshot_$(date +%Y%m%d_%H%M%S).png";
@@ -37,8 +37,6 @@ in
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        # Override Stylix's hyprland target: red-to-yellow gradient active border.
-        "col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base08}) rgb(${config.lib.stylix.colors.base0A}) 45deg";
         layout = "dwindle";
       };
 

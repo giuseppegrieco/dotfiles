@@ -36,7 +36,6 @@
     # Firefox theming needs the profile name declared explicitly.
     targets.firefox.profileNames = [ "giuseppeg" ];
 
-    targets.waybar.enable = false;
     overlays.enable = false;
   };
 

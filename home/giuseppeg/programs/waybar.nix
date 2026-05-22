@@ -44,7 +44,7 @@ in
         };
 
         "custom/logo" = {
-          format = "";
+          format = "";
           tooltip = false;
         };
 

@@ -1,5 +1,10 @@
 { config, pkgs, ... }:
 
+let
+  c = config.lib.stylix.colors.withHashtag;
+  # Icon as a filled badge: accent background, bar-bg colored glyph.
+  badge = color: icon: "<span background='${color}' foreground='${c.base00}'> ${icon} </span>";
+in
 {
   programs.waybar = {
     enable = true;
@@ -7,7 +12,7 @@
       mainBar = {
         layer = "top";
         position = "top";
-        height = 38;
+        height = 44;
         spacing = 4;
         margin-top = 6;
         margin-left = 12;
@@ -46,13 +51,13 @@
         };
 
         cpu = {
-          format = "CPU {usage}%";
+          format = "${badge c.base0B ""} {usage}%";
           tooltip = false;
           on-click = "kitty --class float-btop -e btop";
         };
 
         memory = {
-          format = "RAM {}%";
+          format = "${badge c.base0C "󰍛"} {percentage}%";
         };
 
         idle_inhibitor = {
@@ -97,10 +102,10 @@
         };
 
         network = {
-          format-wifi = "  {essid}";
-          format-ethernet = "󰈀  Ethernet";
-          format-linked = "󰈀  (No IP)";
-          format-disconnected = "󰖪  Disconnected";
+          format-wifi = "${badge c.base0D "󰖩"} {essid}";
+          format-ethernet = "${badge c.base0D "󰈀"} Ethernet";
+          format-linked = "${badge c.base0D "󰈀"} (No IP)";
+          format-disconnected = "${badge c.base08 "󰖪"} Disconnected";
           tooltip-format = "{ifname} via {gwaddr} ";
           on-click = "kitty --class float-network -e nmtui";
         };
@@ -122,8 +127,8 @@
         };
 
         pulseaudio = {
-          format = "{icon}  {volume}%";
-          "format-muted" = "󰝟  muted";
+          format = "${badge c.base09 "{icon}"} {volume}%";
+          "format-muted" = "${badge c.base03 "󰝟"} muted";
           "format-icons" = {
             default = [
               "󰕿"
@@ -161,9 +166,13 @@
       }
 
       window#waybar {
-        background: ${base00};
+        /* base00 fill + red-to-yellow gradient ring; padding-box/border-box
+           keeps the gradient as a border that still respects border-radius. */
+        background:
+          linear-gradient(${base00}, ${base00}) padding-box,
+          linear-gradient(45deg, ${base08}, ${base0A}) border-box;
         color: ${base05};
-        border: 2px solid ${base08};
+        border: 2px solid transparent;
         border-radius: 12px;
       }
 
@@ -173,7 +182,7 @@
       #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
         background: ${base01};
         padding: 0 6px;
-        margin: 5px 4px;
+        margin: 8px 4px;
         border: 2px solid ${base01};
         border-radius: 10px;
       }
@@ -192,7 +201,7 @@
       #workspaces button.urgent  { background: ${base08}; }
       #workspaces button:hover   { background: ${base05}; }
 
-      #clock      { color: ${base0A}; border-color: ${base0A}; }
+      #clock      { color: ${base0A}; border-color: ${base01}; }
       #cpu        { color: ${base0B}; border-color: ${base0B}; }
       #memory     { color: ${base0C}; border-color: ${base0C}; }
       #network    { color: ${base0D}; border-color: ${base0D}; }

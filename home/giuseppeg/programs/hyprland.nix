@@ -22,6 +22,12 @@ in
       "$terminal" = "kitty";
       "$menu" = "rofi -show drun -show-icons";
 
+      # Force the VM display to the Mac's native panel resolution.
+      # Empty name = applies to whatever output the VM exposes.
+      monitor = [
+        ",3456x2234@60,0x0,1"
+      ];
+
       env = [
         "XCURSOR_THEME,Bibata-Modern-Classic"
         "XCURSOR_SIZE,24"
@@ -31,8 +37,8 @@ in
         gaps_in = 5;
         gaps_out = 10;
         border_size = 2;
-        # Override Stylix's hyprland target: red active border instead of cyan.
-        "col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base08})";
+        # Override Stylix's hyprland target: red-to-yellow gradient active border.
+        "col.active_border" = lib.mkForce "rgb(${config.lib.stylix.colors.base08}) rgb(${config.lib.stylix.colors.base0A}) 45deg";
         layout = "dwindle";
       };
 

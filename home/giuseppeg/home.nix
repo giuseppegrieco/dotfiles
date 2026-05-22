@@ -11,10 +11,7 @@
       name = "Bibata-Modern-Classic";
       size = 24;
     };
-
-    # Drive every app's font from here so Stylix is the single definer
-    # (avoids per-app font conflicts). JetBrainsMono for code/terminals,
-    # Inter for proportional UI text.
+    
     fonts =
       let
         jetbrains = {

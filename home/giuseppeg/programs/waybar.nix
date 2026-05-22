@@ -26,12 +26,10 @@ in
         modules-right = [
           "cpu"
           "memory"
-          "network"
           "pulseaudio"
-          "battery"
-          "bluetooth"
-          "idle_inhibitor"
           "tray"
+          "battery"
+          "group/status"
         ];
 
         # NixOS logo + workspace dots packed into one pill.
@@ -40,6 +38,16 @@ in
           modules = [
             "custom/logo"
             "hyprland/workspaces"
+          ];
+        };
+
+        # Network + bluetooth + keep-awake packed into one pill.
+        "group/status" = {
+          orientation = "horizontal";
+          modules = [
+            "network"
+            "bluetooth"
+            "idle_inhibitor"
           ];
         };
 
@@ -193,12 +201,12 @@ in
       }
 
       /* Inset the leftmost/rightmost modules from the bar's rounded edges. */
-      .modules-left  { margin-left: 6px; }
-      .modules-right { margin-right: 6px; }
+      .modules-left  { margin-left: 4px; }
+      .modules-right { margin-right: 4px; }
 
       #clock,
-      #mpris, #idle_inhibitor,
-      #cpu, #memory, #network, #bluetooth, #pulseaudio, #battery, #tray {
+      #mpris,
+      #cpu, #memory, #pulseaudio, #battery, #tray, #status {
         background: ${base01};
         padding: 0 6px;
         margin: 8px 4px;
@@ -248,10 +256,6 @@ in
         color: ${base0C}; border-color: ${base0C}; padding-left: 0;
         background-image: linear-gradient(to right, ${base0C} 1.9em, ${base01} 1.9em);
       }
-      #network {
-        color: ${base0D}; border-color: ${base0D}; padding-left: 0;
-        background-image: linear-gradient(to right, ${base0D} 1.9em, ${base01} 1.9em);
-      }
       #pulseaudio {
         color: ${base09}; border-color: ${base09}; padding-left: 0;
         background-image: linear-gradient(to right, ${base09} 1.9em, ${base01} 1.9em);
@@ -277,6 +281,18 @@ in
       #bluetooth:hover, #idle_inhibitor:hover, #mpris:hover {
         background: ${base02};
       }
+
+      /* Status group: network keeps its left accent block (rounded to the
+         pill), bluetooth + keep-awake sit to its right as plain icons. */
+      #status { padding-left: 0; }
+      #status #network {
+        color: ${base0D};
+        padding: 0 8px 0 0;
+        border-radius: 8px 0 0 8px;
+        background-image: linear-gradient(to right, ${base0D} 1.9em, ${base01} 1.9em);
+      }
+      #status #bluetooth,
+      #status #idle_inhibitor { padding: 0 8px; }
     '';
   };
 }

@@ -33,6 +33,10 @@
       bind k select-pane -U
       bind l select-pane -R
 
+      # Vim/nvim-style splits
+      bind v split-window -h -c "#{pane_current_path}"
+      bind s split-window -v -c "#{pane_current_path}"
+
       # Renumber windows when one is closed
       set -g renumber-windows on
 

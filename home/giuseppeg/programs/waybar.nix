@@ -149,6 +149,12 @@
       #workspaces button.urgent { background-color: ${base08}; color: ${base00}; }
 
       #clock { color: ${base0A}; }
+      #network { color: ${base0B}; }
+      #pulseaudio { color: ${base0D}; }
+      #cpu { color: ${base0E}; }
+      #memory { color: ${base09}; }
+      #bluetooth { color: ${base0C}; }
+      #idle_inhibitor { color: ${base0D}; }
 
       #battery.warning  { color: ${base0A}; }
       #battery.critical { color: ${base08}; }

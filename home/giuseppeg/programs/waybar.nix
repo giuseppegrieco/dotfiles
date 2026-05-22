@@ -11,9 +11,9 @@
         # connected segmented strip (Darkblue-breakcore style).
         height = 24;
         spacing = -2;
-        margin-top = 4;
-        margin-left = 6;
-        margin-right = 6;
+        margin-top = 10;
+        margin-left = 10;
+        margin-right = 10;
         modules-left = [
           "hyprland/workspaces"
         ];

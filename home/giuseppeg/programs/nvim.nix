@@ -10,8 +10,6 @@
 
     extraPackages = with pkgs; [ ];
 
-    plugins = with pkgs.vimPlugins; [ mini-nvim ];
-
     initLua = ''
       require("config.options")
       require("config.remap")

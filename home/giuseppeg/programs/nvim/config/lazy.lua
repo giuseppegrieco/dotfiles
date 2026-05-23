@@ -23,10 +23,4 @@ require("lazy").setup({
   },
   -- automatically check for plugin updates
   checker = { enabled = true },
-  -- keep Nix-managed plugins (e.g. stylix's mini.nvim) on the runtimepath
-  performance = {
-    rtp = {
-      reset = false,
-    },
-  },
 })

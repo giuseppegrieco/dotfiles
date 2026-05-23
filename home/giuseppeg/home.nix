@@ -129,18 +129,23 @@
     wl-clipboard
 
     gcc
-    #    python3
-    #    go
-    #    gopls
-    #    delve
-    #    gnumake
 
-    #    terraform
-    #    kubernetes-helm
-    #    kubectl
-    #    jq
-    #    k9s
-    #    docker-compose
+    lua-language-server
+    bash-language-server
+    vscode-langservers-extracted
+    typescript-language-server
+    yaml-language-server
+    taplo
+    rust-analyzer
+    gopls
+    basedpyright
+    marksman
+    elixir-ls
+
+    stylua
+    prettierd
+    shfmt
+    ruff
 
     opencode
   ];

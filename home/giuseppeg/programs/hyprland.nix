@@ -16,6 +16,7 @@ in
     settings = {
       "exec-once" = [
         "waybar"
+        "hyprpaper"
         "systemctl --user start hyprpolkitagent"
       ];
       "$mod" = "SUPER";
@@ -28,7 +29,7 @@ in
       ];
 
       monitor = [
-        "eDP-1, preferred, auto, 1"
+        "eDP-1, preferred, auto, 1.25"
         ", preferred, auto, 1, mirror, eDP-1"
       ];
 

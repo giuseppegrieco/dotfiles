@@ -1,19 +1,20 @@
-{ ... }:
+{ pkgs, ... }:
 
 let
   wallpaper = ../wallpaper.jpg;
 in
 {
-  services.hyprpaper = {
-    enable = true;
-    settings = {
-      ipc = "on";
-      splash = false;
-      preload = [ "${wallpaper}" ];
-      wallpaper = [
-        "eDP-1,${wallpaper}"
-        ",${wallpaper}"
-      ];
-    };
-  };
+  home.packages = [ pkgs.hyprpaper ];
+
+  xdg.configFile."hypr/hyprpaper.conf".text = ''
+    wallpaper {
+        monitor = eDP-1
+        path = ${wallpaper}
+    }
+
+    wallpaper {
+        monitor =
+        path = ${wallpaper}
+    }
+  '';
 }

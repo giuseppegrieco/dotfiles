@@ -29,6 +29,7 @@ return {
 		pcall(require("telescope").load_extension, "ui-select")
 
 		local set = vim.keymap.set
+		local builtin = require("telescope.builtin")
 
 		-- searches for files by name in the current project
 		set("n", "<leader>fd", builtin.find_files)

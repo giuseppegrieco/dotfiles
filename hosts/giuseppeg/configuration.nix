@@ -44,8 +44,6 @@
 
   services.power-profiles-daemon.enable = false;
 
-  services.thermald.enable = true;
-
   services.upower = {
     enable = true;
     percentageLow = 15;

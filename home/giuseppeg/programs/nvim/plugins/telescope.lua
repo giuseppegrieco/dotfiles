@@ -36,8 +36,8 @@ return {
 		-- search through neovim's help documentation
 		set("n", "<leader>fh", builtin.help_tags)
 		-- search for a specific text across the current project
-		-- set("n", "<leader>fg", require "custom.telescope.multi-ripgrep")
-		-- search for a specific text across opened files
+		set("n", "<leader>fg", builtin.live_grep)
+		-- search for a specific file across opened files
 		set("n", "<leader>fb", builtin.buffers)
 		-- search for a specific text within the current file
 		set("n", "<leader>/", builtin.current_buffer_fuzzy_find)

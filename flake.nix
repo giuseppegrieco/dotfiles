@@ -25,12 +25,12 @@
     }@inputs:
     {
       nixosConfigurations = {
-        mac-vm = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
+        giuseppeg = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
 
           modules = [
-            ./hosts/mac-vm/configuration.nix
+            ./hosts/giuseppeg/configuration.nix
 
             home-manager.nixosModules.home-manager
             {

@@ -14,15 +14,15 @@
         margin-right = 10;
         modules-left = [
           "hyprland/workspaces"
+          "network"
+          "bluetooth"
         ];
         modules-center = [ "clock" ];
         modules-right = [
-          "network"
           "pulseaudio"
           "cpu"
           "memory"
           "battery"
-          "bluetooth"
           "idle_inhibitor"
           "tray"
         ];
@@ -47,7 +47,7 @@
 
         memory = {
           format = "RAM: {percentage}%";
-	  on-click = "kitty -e btop";
+          on-click = "kitty -e btop";
         };
 
         network = {

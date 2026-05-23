@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	dependencies = "tsakirist/telescope-lazy.nvim"
+	dependencies = "tsakirist/telescope-lazy.nvim",
 
 	config = function()
 		local data = assert(vim.fn.stdpath "data") --[[@as string]]
@@ -42,4 +42,5 @@ return {
 		set("n", "<leader>/", builtin.current_buffer_fuzzy_find)
 		-- search current word in the current project
 		set("n", "<leader>gw", builtin.grep_string)
+	end
 }

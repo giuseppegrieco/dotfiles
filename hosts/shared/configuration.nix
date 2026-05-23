@@ -9,9 +9,11 @@
   # Bootloader (UEFI / systemd-boot on all hosts)
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.tmp.cleanOnBoot = true;
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.firewall.enable = true;
 
   # Audio (PipeWire with PulseAudio-compatible socket for pamixer/waybar)
   security.rtkit.enable = true;
@@ -66,6 +68,7 @@
       "networkmanager"
       "wheel"
       "video"
+      "docker"
     ];
     shell = pkgs.zsh;
   };

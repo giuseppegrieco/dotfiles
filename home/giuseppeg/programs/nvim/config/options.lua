@@ -1,4 +1,4 @@
-local opt = vim opt
+local opt = vim.opt
 
 -- shows the effects of |:substitute|, |:smagic|,
 -- |:snomagic| and user commands with the |:command-preview| flag as you type.

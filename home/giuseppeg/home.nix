@@ -115,6 +115,9 @@
     btop
     nmap
     fastfetch
+    gh
+    jq
+    yq
 
     pavucontrol
     pamixer
@@ -128,6 +131,21 @@
     wl-clipboard
 
     gcc
+    cmake
+    pkg-config
+
+    rustc
+    cargo
+    rustfmt
+    clippy
+    go
+    golangci-lint
+    nodejs
+    pnpm
+    python3
+    uv
+    poetry
+    elixir
 
     lua-language-server
     bash-language-server

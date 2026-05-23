@@ -4,7 +4,7 @@ local opt = vim.opt
 -- |:snomagic| and user commands with the |:command-preview| flag as you type.
 -- Shows the effects of a command incrementally in the
 -- buffer and partial off-screen results in a preview window.
-opt.inccommand = true
+opt.inccommand = "split" 
 -- print the line number in front of each line
 opt.number = true
 -- show relative line number in front of each line

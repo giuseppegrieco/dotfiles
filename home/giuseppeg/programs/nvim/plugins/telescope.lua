@@ -18,7 +18,7 @@ return {
 					limit = 100,
 				},
 				["ui-select"] = {
-					require("telescope.themes").get_dropdown() {},
+					require("telescope.themes").get_dropdown({}),
 				},
 			},
 		})

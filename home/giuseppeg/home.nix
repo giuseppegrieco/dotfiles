@@ -66,7 +66,6 @@
     ./programs/starship.nix
     ./programs/swayosd.nix
     ./programs/tmux.nix
-    ./programs/vscode.nix
     ./programs/waybar.nix
     ./programs/zsh.nix
   ];
@@ -146,6 +145,12 @@
     prettierd
     shfmt
     ruff
+
+    gnumake
+    parinfer-rust
+    vscode-extensions.vadimcn.vscode-lldb
+    delve
+    python3Packages.debugpy
 
     opencode
   ];

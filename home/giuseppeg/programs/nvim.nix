@@ -8,9 +8,8 @@
     withRuby = false;
     withPython3 = false;
 
-    extraPackages = with pkgs; [ ];
-
     initLua = ''
+      vim.g.parinfer_dylib_path = "${pkgs.parinfer-rust}/lib/libparinfer_rust.so"
       require("config.options")
       require("config.remap")
       require("config.lazy")

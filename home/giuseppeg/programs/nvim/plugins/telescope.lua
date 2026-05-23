@@ -1,6 +1,9 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	dependencies = "tsakirist/telescope-lazy.nvim",
+	dependencies = {
+		"tsakirist/telescope-lazy.nvim",
+		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	},
 
 	config = function()
 		local data = assert(vim.fn.stdpath "data") --[[@as string]]

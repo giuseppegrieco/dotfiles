@@ -31,6 +31,7 @@ in
       monitor = [
         "eDP-1, preferred, auto, 1.25"
         ", preferred, auto, 1, mirror, eDP-1"
+        "desc:Microstep MSI G32CQ4 E2 0x01010101, 2560x1440@143.91, auto, 1"
       ];
 
       general = {
@@ -131,6 +132,10 @@ in
         "$mod, ESCAPE, exec, hyprlock"
       ];
 
+      bindl = [
+        ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1,disable\""
+        ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1,preferred,auto,1.25\""
+      ];
     };
   };
 }

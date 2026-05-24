@@ -30,7 +30,7 @@ in
 
       monitor = [
         "eDP-1, preferred, auto, 1.25"
-        ", preferred, auto, 1"
+        ", preferred, auto, 1, mirror, eDP-1"
       ];
 
       general = {
@@ -132,8 +132,8 @@ in
       ];
 
       bindl = [
-        ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, preferred, auto, 1, mirror, HDMI-A-1\""
-        ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, preferred, auto, 1\""
+        ", switch:on:Lid Switch, exec, hyprctl --batch \"keyword monitor HDMI-A-1,preferred,auto,1 ; keyword monitor eDP-1,disable\""
+        ", switch:off:Lid Switch, exec, hyprctl --batch \"keyword monitor eDP-1,preferred,auto,1.25 ; keyword monitor HDMI-A-1,preferred,auto,1,mirror,eDP-1\""
       ];
     };
   };

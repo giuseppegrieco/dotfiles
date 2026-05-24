@@ -99,6 +99,7 @@
     gimp
     rnote
     discord
+    slack
     obs-studio
 
     valgrind
@@ -123,6 +124,7 @@
     pamixer
     blueman
     playerctl
+    spotify-player
     brightnessctl
 
     grim

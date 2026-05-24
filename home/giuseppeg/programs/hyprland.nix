@@ -8,10 +8,6 @@ let
   takeArea = "grim -g \"$(slurp)\" ${savePath} && notify-send 'Screenshot saved' 'Region captured'";
   editShot = "swappy -f ${latest}";
   copyShot = "wl-copy < ${latest} && notify-send 'Screenshot copied' 'Copied to clipboard'";
-
-  restartWaybar = "pkill waybar; sleep 0.3; hyprctl dispatch exec waybar";
-  lidClose = "hyprctl --batch \"keyword monitor HDMI-A-1,preferred,auto,1 ; keyword monitor eDP-1,disable\"; sleep 0.3; ${restartWaybar}";
-  lidOpen = "hyprctl --batch \"keyword monitor eDP-1,preferred,auto,1.25 ; keyword monitor HDMI-A-1,preferred,auto,1,mirror,eDP-1\"; sleep 0.3; ${restartWaybar}";
 in
 {
   wayland.windowManager.hyprland = {
@@ -34,7 +30,7 @@ in
 
       monitor = [
         "eDP-1, preferred, auto, 1.25"
-        ", preferred, auto, 1, mirror, eDP-1"
+        ", preferred, auto, 1"
       ];
 
       general = {
@@ -136,8 +132,8 @@ in
       ];
 
       bindl = [
-        ", switch:on:Lid Switch, exec, ${lidClose}"
-        ", switch:off:Lid Switch, exec, ${lidOpen}"
+        ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, preferred, auto, 1, mirror, HDMI-A-1\""
+        ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1, preferred, auto, 1\""
       ];
     };
   };

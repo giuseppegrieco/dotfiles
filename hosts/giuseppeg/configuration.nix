@@ -57,4 +57,9 @@
     HandleLidSwitchDocked = "ignore";
     HandleLidSwitchExternalPower = "ignore";
   };
+
+  # Auto-mount removable USB drives.
+  # Drives appear at /run/media/<user>/<label>.
+  services.udisks2.enable = true;
+  programs.udiskie.enable = true;
 }

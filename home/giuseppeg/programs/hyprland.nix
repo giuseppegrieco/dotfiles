@@ -132,7 +132,7 @@ in
       ];
 
       bindl = [
-        ", switch:on:Lid Switch, exec, hyprctl keyword monitor \"eDP-1,disable\" ; hyprctl keyword monitor \",preferred,auto,1\""
+        ", switch:on:Lid Switch, exec, hyprctl keyword monitor \",preferred,auto,1\" ; hyprctl keyword monitor \"eDP-1,disable\""
         ", switch:off:Lid Switch, exec, hyprctl keyword monitor \"eDP-1,preferred,auto,1\" ; hyprctl keyword monitor \",preferred,auto,1,mirror,eDP-1\""
       ];
     };

@@ -66,6 +66,7 @@
     ./programs/starship.nix
     ./programs/swayosd.nix
     ./programs/tmux.nix
+    ./programs/udiskie.nix
     ./programs/waybar.nix
     ./programs/zsh.nix
   ];

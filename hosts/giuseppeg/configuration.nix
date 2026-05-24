@@ -60,6 +60,7 @@
 
   # Auto-mount removable USB drives.
   # Drives appear at /run/media/<user>/<label>.
+  # The udiskie daemon (which actually performs the mounting) is configured
+  # per-user in home-manager (home/giuseppeg/home.nix).
   services.udisks2.enable = true;
-  programs.udiskie.enable = true;
 }

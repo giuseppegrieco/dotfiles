@@ -69,6 +69,7 @@
       "wheel"
       "video"
       "docker"
+      "dialout"
     ];
     shell = pkgs.zsh;
   };

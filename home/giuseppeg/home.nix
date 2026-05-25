@@ -76,6 +76,7 @@
     BROWSER = "${pkgs.firefox}/bin/firefox";
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
+    KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
   };
 
   xdg.mimeApps = {
@@ -172,6 +173,10 @@
     vscode-extensions.vadimcn.vscode-lldb
     delve
     python3Packages.debugpy
+
+    kubectl
+    k9s
+    kubernetes-helm
 
     opencode
   ];

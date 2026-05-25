@@ -63,4 +63,13 @@
   # The udiskie daemon (which actually performs the mounting) is configured
   # per-user in home-manager (home/giuseppeg/home.nix).
   services.udisks2.enable = true;
+
+  # Local single-node Kubernetes via k3s.
+  # Kubeconfig is written world-readable at /etc/rancher/k3s/k3s.yaml so
+  # kubectl works without sudo (see KUBECONFIG in home.nix).
+  services.k3s = {
+    enable = true;
+    role = "server";
+    extraFlags = [ "--write-kubeconfig-mode=644" ];
+  };
 }

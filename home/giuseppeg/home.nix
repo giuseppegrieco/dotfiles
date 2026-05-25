@@ -79,6 +79,10 @@
     KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
   };
 
+  home.sessionPath = [
+    "$HOME/go/bin"
+  ];
+
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {

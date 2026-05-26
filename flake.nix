@@ -26,7 +26,7 @@
     {
       nixosConfigurations = {
         giuseppeg = nixpkgs.lib.nixosSystem {
-          system = "x";
+          system = "x86_64-linux";
           specialArgs = { inherit inputs; };
 
           modules = [

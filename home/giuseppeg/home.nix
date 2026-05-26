@@ -173,6 +173,7 @@
     ruff
 
     gnumake
+    tree-sitter
     parinfer-rust
     vscode-extensions.vadimcn.vscode-lldb
     delve

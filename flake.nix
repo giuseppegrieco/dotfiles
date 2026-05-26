@@ -26,11 +26,11 @@
     {
       nixosConfigurations = {
         giuseppeg = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = "x";
           specialArgs = { inherit inputs; };
 
           modules = [
-            ./hosts/giuseppeg/configuration.nix
+            ./hosts/mac-vm/configuration.nix
 
             home-manager.nixosModules.home-manager
             {

@@ -29,4 +29,5 @@ set("n", "<M-.>", "<c-w>5>")
 set("n", "<M-t>", "<C-W>+")
 -- increase window height
 set("n", "<M-s>", "<C-W>-")
-
+-- move to the left split
+set("n", "<c-j>", "<c-w><c-j>")

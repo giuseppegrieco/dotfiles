@@ -30,7 +30,7 @@
           specialArgs = { inherit inputs; };
 
           modules = [
-            ./hosts/mac-vm/configuration.nix
+            ./hosts/giuseppeg/configuration.nix
 
             home-manager.nixosModules.home-manager
             {

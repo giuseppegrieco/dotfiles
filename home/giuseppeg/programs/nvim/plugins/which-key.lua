@@ -6,7 +6,6 @@ return {
 		spec = {
 			{ "<leader>f", group = "Find (Telescope)" },
 			{ "<leader>t", group = "Test (Neotest)" },
-			{ "<leader>D", group = "Database (Dadbod)" },
 			{ "<leader>g", group = "Git / Grep / DAP run-to-cursor" },
 			{ "<leader>x", group = "Trouble" },
 			{ "<leader>c", group = "Code / Trouble" },

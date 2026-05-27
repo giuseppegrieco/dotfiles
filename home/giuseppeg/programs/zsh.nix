@@ -24,6 +24,8 @@
     shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#\$(hostname)";
       ncg = "nix-collect-garbage -d";
+      nix-clean = "sudo nix-collect-garbage -d --delete-older-than 14d && sudo nix store optimise";
+      nix-audit = "nix shell nixpkgs#vulnix -c vulnix --system";
 
       ls = "ls --color=auto --group-directories-first";
       ll = "yazi";

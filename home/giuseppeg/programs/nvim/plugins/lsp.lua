@@ -12,6 +12,10 @@ return {
 			"marksman", "elixirls",
 		}
 
+		vim.lsp.config("clangd", {
+			cmd = { "clangd", "--query-driver=/nix/store/*/bin/*" },
+		})
+
 		vim.lsp.config("lua_ls", {
 			settings = {
 				Lua = {

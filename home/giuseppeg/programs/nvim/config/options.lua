@@ -13,6 +13,14 @@ opt.relativenumber = true
 opt.autoindent = true
 -- smart autoindenting for C programs
 opt.smartindent = true
+-- use real tab characters, not spaces
+opt.expandtab = false
+-- how many columns a <Tab> renders as
+opt.tabstop = 4
+-- columns inserted/removed by <Tab>/<BS> in insert mode
+opt.softtabstop = 4
+-- columns used by autoindent and >>, <<
+opt.shiftwidth = 4
 -- long lines wrap and continue on the next line
 opt.wrap = true
 -- GUI: settings for cursor shape and blinking

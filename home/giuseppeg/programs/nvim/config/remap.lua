@@ -18,9 +18,9 @@ set("n", "<left>", "gT")
 -- go to next tab
 set("n", "<right>", "gt")
 -- jump to next error
-set("n", "]d", vim.diagnostic.goto_next)
+set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
 -- jump to previous error
-set("n", "[d", vim.diagnostic.goto_prev)
+set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
 -- decrease window width
 set("n", "<M-,>", "<c-w>5<")
 -- increase window width

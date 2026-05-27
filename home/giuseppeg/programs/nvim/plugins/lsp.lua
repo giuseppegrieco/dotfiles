@@ -4,7 +4,7 @@ return {
 	dependencies = { "saghen/blink.cmp", "nvim-telescope/telescope.nvim" },
 	config = function()
 		local servers = {
-			"lua_ls", "nixd", "clangd", "bashls",
+			"lua_ls", "nixd", "clangd", "cmake", "bashls",
 			"html", "cssls", "jsonls", "eslint",
 			"ts_ls", "yamlls", "taplo",
 			"rust_analyzer", "gopls",

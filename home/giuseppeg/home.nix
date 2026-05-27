@@ -115,6 +115,7 @@
     clang-tools
 
     yazi
+    unzip
     bat
     fzf
     ripgrep
@@ -166,6 +167,7 @@
     basedpyright
     marksman
     elixir-ls
+    cmake-language-server
 
     stylua
     prettierd

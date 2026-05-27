@@ -18,9 +18,11 @@ set("n", "<left>", "gT")
 -- go to next tab
 set("n", "<right>", "gt")
 -- jump to next error
-set("n", "]d", function() vim.diagnostic.jump({ count = 1 }) end)
+set("n", "]d", function() vim.diagnostic.jump({ count = 1, float = true }) end)
 -- jump to previous error
-set("n", "[d", function() vim.diagnostic.jump({ count = -1 }) end)
+set("n", "[d", function() vim.diagnostic.jump({ count = -1, float = true }) end)
+-- show diagnostic at cursor
+set("n", "<leader>e", vim.diagnostic.open_float)
 -- decrease window width
 set("n", "<M-,>", "<c-w>5<")
 -- increase window width

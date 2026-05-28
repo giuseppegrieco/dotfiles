@@ -42,12 +42,12 @@
         cpu = {
           format = "CPU: {usage}%";
           # tooltip = false;
-          on-click = "kitty -e btop";
+          on-click = "hyprctl dispatch exec 'kitty -e btop'";
         };
 
         memory = {
           format = "RAM: {percentage}%";
-          on-click = "kitty -e btop";
+          on-click = "hyprctl dispatch exec 'kitty -e btop'";
         };
 
         network = {
@@ -56,7 +56,7 @@
           format-linked = "NET: connected";
           format-disconnected = "NET: disconnected";
           tooltip-format = "{ifname} via {gwaddr}";
-          on-click = "kitty --class float-network -e nmtui";
+          on-click = "hyprctl dispatch exec 'kitty -e nmtui'";
         };
 
         pulseaudio = {
@@ -64,7 +64,7 @@
           "format-muted" = "VOL: muted";
           "scroll-step" = 5;
           on-click = "pamixer -t";
-          "on-click-right" = "pavucontrol";
+          "on-click-right" = "hyprctl dispatch exec 'pavucontrol'";
           "tooltip-format" = "{desc}  {volume}%";
         };
 
@@ -83,7 +83,7 @@
           "format-disabled" = "BT: off";
           "format-off" = "BT: off";
           "format-connected" = "BT: on";
-          on-click = "blueman-manager";
+          on-click = "hyprctl dispatch exec 'kitty -e bluetuith'";
           "tooltip-format" = "{controller_alias}\t{controller_address}";
           "tooltip-format-connected" = "{device_enumerate}";
         };

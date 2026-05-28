@@ -129,7 +129,7 @@
 
     pavucontrol
     pamixer
-    blueman
+    bluetuith
     playerctl
     spotify-player
     brightnessctl

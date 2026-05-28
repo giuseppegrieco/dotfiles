@@ -103,6 +103,8 @@
     libnotify
 
     gimp
+    krita
+    pixelorama
     rnote
     discord
     slack

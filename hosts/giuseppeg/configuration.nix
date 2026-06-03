@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -67,9 +67,12 @@
   # Local single-node Kubernetes via k3s.
   # Kubeconfig is written world-readable at /etc/rancher/k3s/k3s.yaml so
   # kubectl works without sudo (see KUBECONFIG in home.nix).
+  # Service is installed but does not autostart at boot — use the
+  # `k3s-start` / `k3s-stop` zsh aliases to control it on demand.
   services.k3s = {
     enable = true;
     role = "server";
     extraFlags = [ "--write-kubeconfig-mode=644" ];
   };
+  systemd.services.k3s.wantedBy = lib.mkForce [ ];
 }

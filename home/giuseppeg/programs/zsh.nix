@@ -34,6 +34,8 @@
       spush = "sudo GIT_SSH_COMMAND='ssh -i /home/giuseppeg/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git push";
       spull = "sudo GIT_SSH_COMMAND='ssh -i /home/giuseppeg/.ssh/id_ed25519_github -o IdentitiesOnly=yes' git pull";
 
+      k3s-start = "sudo systemctl start k3s";
+      k3s-stop = "sudo systemctl stop k3s";
       k3s-restart = "sudo systemctl restart k3s";
     };
 

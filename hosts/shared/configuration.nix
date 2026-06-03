@@ -57,6 +57,16 @@
 
   programs.hyprland.enable = true;
 
+  programs.weylus = {
+    enable = true;
+    users = [ "giuseppeg" ];
+  };
+
+  # Allow Weylus (port 1701) only from private LAN ranges.
+  networking.firewall.extraInputRules = ''
+    ip saddr { 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16 } tcp dport 1701 accept
+  '';
+
   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

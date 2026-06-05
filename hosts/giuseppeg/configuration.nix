@@ -75,4 +75,11 @@
     extraFlags = [ "--write-kubeconfig-mode=644" ];
   };
   systemd.services.k3s.wantedBy = lib.mkForce [ ];
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+  hardware.steam-hardware.enable = true;
 }

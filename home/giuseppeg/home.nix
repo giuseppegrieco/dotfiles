@@ -40,8 +40,6 @@
     overlays.enable = false;
   };
 
-  gtk.gtk4.theme = config.gtk.theme;
-
   home.username = "giuseppeg";
   home.homeDirectory = "/home/giuseppeg";
   xdg.userDirs = {

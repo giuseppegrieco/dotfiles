@@ -151,6 +151,7 @@
     clippy
     go
     golangci-lint
+    goreleaser
     nodejs
     pnpm
     python3

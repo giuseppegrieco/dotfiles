@@ -76,6 +76,7 @@
     NIXOS_OZONE_WL = "1";
     NIXPKGS_ALLOW_UNFREE = "1";
     KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
+    JAVA_HOME = pkgs.jdk.home;
   };
 
   home.sessionPath = [
@@ -157,6 +158,9 @@
     uv
     poetry
     elixir
+    jdk
+    maven
+    gradle
 
     lua-language-server
     bash-language-server
@@ -170,11 +174,13 @@
     marksman
     elixir-ls
     cmake-language-server
+    jdt-language-server
 
     stylua
     prettierd
     shfmt
     ruff
+    google-java-format
 
     gnumake
     tree-sitter

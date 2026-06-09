@@ -10,6 +10,7 @@ return {
 			"rust_analyzer", "gopls",
 			"basedpyright", "ruff",
 			"marksman", "elixirls",
+			"jdtls",
 		}
 
 		vim.lsp.config("clangd", {

@@ -46,6 +46,13 @@ in
         ms-python.python
         elixir-lsp.vscode-elixir-ls
 
+        redhat.java
+        vscjava.vscode-java-debug
+        vscjava.vscode-java-test
+        vscjava.vscode-maven
+        vscjava.vscode-gradle
+        vscjava.vscode-java-dependency
+
         esbenp.prettier-vscode
         foxundermoon.shell-format
 
@@ -81,6 +88,21 @@ in
 
         "go.formatTool" = "gofmt";
         "[go]"."editor.formatOnSave" = true;
+
+        "java.jdt.ls.java.home" = pkgs.jdk.home;
+        "java.configuration.runtimes" = [
+          {
+            name = "JavaSE-21";
+            path = pkgs.jdk.home;
+            default = true;
+          }
+        ];
+        "java.import.gradle.java.home" = pkgs.jdk.home;
+        "redhat.telemetry.enabled" = false;
+        "[java]" = {
+          "editor.defaultFormatter" = "redhat.java";
+          "editor.formatOnSave" = true;
+        };
 
         "[toml]"."editor.defaultFormatter" = "tamasfe.even-better-toml";
 

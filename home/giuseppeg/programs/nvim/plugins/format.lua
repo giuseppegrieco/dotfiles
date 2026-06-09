@@ -11,6 +11,7 @@ return {
 			bash            = { "shfmt" },
 			rust            = { "rustfmt" },
 			go              = { "gofmt" },
+			java            = { "google-java-format" },
 			toml            = { "taplo" },
 			javascript      = { "prettierd", "prettier", stop_after_first = true },
 			typescript      = { "prettierd", "prettier", stop_after_first = true },

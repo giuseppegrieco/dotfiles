@@ -65,6 +65,7 @@
     ./programs/swayosd.nix
     ./programs/tmux.nix
     ./programs/udiskie.nix
+    ./programs/vscode.nix
     ./programs/waybar.nix
     ./programs/zsh.nix
   ];

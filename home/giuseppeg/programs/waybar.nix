@@ -145,7 +145,7 @@
         border-radius: 0;
         transition: background-color 120ms ease, color 120ms ease;
       }
-      #workspaces button.active { background-color: ${base01}; color: ${base0A}; }
+      #workspaces button.active { background-color: ${base01}; color: ${base08}; }
       #workspaces button:hover  { background-color: ${base02}; color: ${base00}; }
       #workspaces button.urgent { background-color: ${base08}; color: ${base00}; }
 

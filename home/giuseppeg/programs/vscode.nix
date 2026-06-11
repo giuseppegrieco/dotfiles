@@ -60,6 +60,8 @@ in
         ms-python.debugpy
 
         vscodevim.vim
+
+        supermaven.supermaven
       ];
 
       userSettings = {

@@ -51,7 +51,11 @@
   # suspended. TLP's USB_AUTOSUSPEND=0 only stops TLP from *enabling* it; the
   # kernel default (usbcore.autosuspend=2) would still suspend idle hubs and
   # drop whatever sits behind them.
-  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+  boot.kernelParams = [
+    "usbcore.autosuspend=-1"
+    "snd_intel_dspcfg.dsp_driver=3"
+    "snd_hda_intel.dmic_detect=1"
+  ];
 
   # Firmware updates (Lenovo BIOS + ThinkPad USB4 dock) via LVFS/fwupd.
   # The dock and laptop are new; their firmware has never been updated under

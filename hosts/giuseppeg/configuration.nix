@@ -49,13 +49,17 @@
 
   boot.kernelPackages = pkgs.linuxPackages_6_12;
 
-  # Disable USB runtime autosuspend kernel-wide so idle USB hubs are never
-  # suspended. TLP's USB_AUTOSUSPEND=0 only stops TLP from *enabling* it; the
-  # kernel default (usbcore.autosuspend=2) would still suspend idle hubs and
-  # drop whatever sits behind them.
+  # usbcore.autosuspend=-1: disable USB runtime autosuspend so idle hubs are
+  #   never suspended (TLP's USB_AUTOSUSPEND=0 only stops TLP enabling it).
+  # snd_intel_dspcfg.dsp_driver=1: force the legacy HD-audio driver instead of
+  #   SOF. On this T14 Gen 4 the SOF path (dsp_driver=3) loads a generic topology
+  #   that never exposes the laptop speakers (only HDMI/DP) and the sinks flap;
+  #   the legacy driver drives the ALC257 speakers correctly. Trade-off: the
+  #   internal digital mic needs SOF, so it may stop working — fine, the mic is
+  #   the external Shure. (dmic_detect tries to keep the internal mic on legacy.)
   boot.kernelParams = [
     "usbcore.autosuspend=-1"
-    "snd_intel_dspcfg.dsp_driver=3"
+    "snd_intel_dspcfg.dsp_driver=1"
     "snd_hda_intel.dmic_detect=1"
   ];
 

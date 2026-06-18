@@ -59,6 +59,7 @@
     "usbcore.autosuspend=-1"
     "snd_intel_dspcfg.dsp_driver=1"
     "snd_hda_intel.dmic_detect=1"
+    "usbcore.quirks=17ef:118e:k,17ef:1190:k,17ef:118f:k,17ef:1191:k,17ef:1193:k"
   ];
 
   # Firmware updates (Lenovo BIOS + ThinkPad USB4 dock) via LVFS/fwupd.

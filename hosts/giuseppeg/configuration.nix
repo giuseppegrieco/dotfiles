@@ -47,14 +47,11 @@
     };
   };
 
-  # TLP's USB_AUTOSUSPEND=0 only stops TLP from *enabling* autosuspend; the
-  # kernel default (usbcore.autosuspend=2) still puts the ThinkPad USB4 dock's
-  # internal hubs in power/control=auto, so they suspend when idle and drop
-  # whatever sits behind them (keyboard, Shure mic) until a physical replug.
-  # Pin the dock's Lenovo hubs (vendor 17ef, USB hub class 09) to stay powered.
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="17ef", ATTR{bDeviceClass}=="09", ATTR{power/control}="on"
-  '';
+  # Disable USB runtime autosuspend kernel-wide. TLP's USB_AUTOSUSPEND=0 only
+  # stops TLP from *enabling* it; the kernel default (usbcore.autosuspend=2)
+  # still suspends idle USB hubs, which drops anything behind them (dock
+  # keyboard, Shure mic, etc.) until a physical replug. -1 means "never".
+  boot.kernelParams = [ "usbcore.autosuspend=-1" ];
 
   services.power-profiles-daemon.enable = false;
 

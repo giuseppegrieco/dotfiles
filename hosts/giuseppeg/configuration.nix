@@ -47,11 +47,18 @@
     };
   };
 
-  # Disable USB runtime autosuspend kernel-wide. TLP's USB_AUTOSUSPEND=0 only
-  # stops TLP from *enabling* it; the kernel default (usbcore.autosuspend=2)
-  # still suspends idle USB hubs, which drops anything behind them (dock
-  # keyboard, Shure mic, etc.) until a physical replug. -1 means "never".
+  # Disable USB runtime autosuspend kernel-wide so idle USB hubs are never
+  # suspended. TLP's USB_AUTOSUSPEND=0 only stops TLP from *enabling* it; the
+  # kernel default (usbcore.autosuspend=2) would still suspend idle hubs and
+  # drop whatever sits behind them.
   boot.kernelParams = [ "usbcore.autosuspend=-1" ];
+
+  # Firmware updates (Lenovo BIOS + ThinkPad USB4 dock) via LVFS/fwupd.
+  # The dock and laptop are new; their firmware has never been updated under
+  # Linux. Dock/BIOS firmware is the standard root-cause fix for USB devices
+  # that won't enumerate at boot until replugged. `fwupdmgr get-devices` to
+  # list, `fwupdmgr update` to apply.
+  services.fwupd.enable = true;
 
   services.power-profiles-daemon.enable = false;
 

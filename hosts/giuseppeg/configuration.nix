@@ -47,6 +47,8 @@
     };
   };
 
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
+
   # Disable USB runtime autosuspend kernel-wide so idle USB hubs are never
   # suspended. TLP's USB_AUTOSUSPEND=0 only stops TLP from *enabling* it; the
   # kernel default (usbcore.autosuspend=2) would still suspend idle hubs and

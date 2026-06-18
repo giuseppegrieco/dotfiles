@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   imports = [
@@ -33,7 +38,7 @@
       RUNTIME_PM_ON_AC = "auto";
       RUNTIME_PM_ON_BAT = "auto";
 
-      USB_AUTOSUSPEND = 1;
+      USB_AUTOSUSPEND = 0;
 
       # Preserve battery health: charge to 80%, resume below 75%.
       # Bump STOP to 100 before a long unplugged trip.
@@ -57,6 +62,13 @@
     HandleLidSwitchDocked = "ignore";
     HandleLidSwitchExternalPower = "ignore";
   };
+
+  # Thunderbolt / USB4 device manager (boltd).
+  # The ThinkPad USB4 dock sits behind Thunderbolt security level "user", so its
+  # router comes up authorized=0 at cold boot and only partially enumerates.
+  # boltd lets the dock be enrolled once (`boltctl enroll <uuid>`) so it is
+  # authorized automatically on every boot. Also provides the `boltctl` CLI.
+  services.hardware.bolt.enable = true;
 
   # Auto-mount removable USB drives.
   # Drives appear at /run/media/<user>/<label>.

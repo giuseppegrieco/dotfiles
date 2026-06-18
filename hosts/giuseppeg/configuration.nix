@@ -55,11 +55,19 @@
   #   the legacy driver drives the ALC257 speakers correctly. Trade-off: the
   #   internal digital mic needs SOF, so it may stop working — fine, the mic is
   #   the external Shure. (dmic_detect tries to keep the internal mic on legacy.)
+  # thunderbolt.host_reset=0: stop the kernel resetting the USB4 host router at
+  #   probe (default on). When the dock is attached at cold boot, that reset
+  #   races the dock's downstream USB-C enumeration, so the keyboard + Shure
+  #   don't appear until the dock is physically re-plugged. Disabling it lets
+  #   the dock enumerate fully at boot. (Known TB-dock-at-boot fix; the issue is
+  #   confirmed upstream by the Thunderbolt maintainer.)
   boot.kernelParams = [
     "usbcore.autosuspend=-1"
-    "snd_intel_dspcfg.dsp_driver=1"
+    "snd_intel_dspcfg.dsp_driver=3"
     "snd_hda_intel.dmic_detect=1"
+    "snd_sof.sof_debug=1"
     "pcie_aspm=off"
+    "thunderbolt.host_reset=0"
   ];
 
   # Firmware updates (Lenovo BIOS + ThinkPad USB4 dock) via LVFS/fwupd.

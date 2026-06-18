@@ -47,8 +47,6 @@
     };
   };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_12;
-
   # usbcore.autosuspend=-1: disable USB runtime autosuspend so idle hubs are
   #   never suspended (TLP's USB_AUTOSUSPEND=0 only stops TLP enabling it).
   # snd_intel_dspcfg.dsp_driver=1: force the legacy HD-audio driver instead of

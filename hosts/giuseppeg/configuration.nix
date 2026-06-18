@@ -59,7 +59,7 @@
     "usbcore.autosuspend=-1"
     "snd_intel_dspcfg.dsp_driver=1"
     "snd_hda_intel.dmic_detect=1"
-    "usbcore.quirks=17ef:118e:k,17ef:1190:k,17ef:118f:k,17ef:1191:k,17ef:1193:k"
+    "pcie_aspm=off"
   ];
 
   # Firmware updates (Lenovo BIOS + ThinkPad USB4 dock) via LVFS/fwupd.
@@ -84,6 +84,11 @@
     HandleLidSwitchDocked = "ignore";
     HandleLidSwitchExternalPower = "ignore";
   };
+
+  services.udev.extraRules = ''
+    	ACTION=="add", SUBSYSTEM=="usb", ATTR{power/control}="on"
+    	ACTION=="add", SUBSYSTEM=="pci", ATTR{power/control}="on"
+  '';
 
   # Thunderbolt / USB4 device manager (boltd).
   # The ThinkPad USB4 dock sits behind Thunderbolt security level "user", so its

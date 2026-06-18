@@ -35,8 +35,8 @@
       PLATFORM_PROFILE_ON_AC = "balanced";
       PLATFORM_PROFILE_ON_BAT = "low-power";
 
-      RUNTIME_PM_ON_AC = "auto";
-      RUNTIME_PM_ON_BAT = "auto";
+      RUNTIME_PM_ON_AC = "on";
+      RUNTIME_PM_ON_BAT = "on";
 
       USB_AUTOSUSPEND = 0;
 
@@ -46,13 +46,6 @@
       STOP_CHARGE_THRESH_BAT0 = 80;
     };
   };
-
-  # Use the LTS kernel instead of the bleeding-edge default. USB devices behind
-  # the USB4 dock (QMK keyboard, Shure mic) fail to enumerate at boot on the
-  # latest kernel but work after a replug and on Windows/macOS — the signature
-  # of a Thunderbolt/USB4 enumeration regression in the newest kernel. The LTS
-  # is the proven branch. Reversible: previous generations stay in the boot menu.
-  boot.kernelPackages = pkgs.linuxPackages_lts;
 
   # Disable USB runtime autosuspend kernel-wide so idle USB hubs are never
   # suspended. TLP's USB_AUTOSUSPEND=0 only stops TLP from *enabling* it; the

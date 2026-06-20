@@ -9,7 +9,15 @@ let
   #   FOV 65° -> zoom 171  (tightest of the three; good for "just my face")
   # Tweak these zoom numbers to taste — the FOV labels are nominal.
   cameraDev = "/dev/v4l/by-id/usb-Anker_PowerConf_C200_*-video-index0";
-  binPath = lib.makeBinPath [ pkgs.v4l-utils pkgs.coreutils pkgs.gawk pkgs.procps ];
+  binPath = lib.makeBinPath [
+    pkgs.v4l-utils
+    config.wayland.windowManager.hyprland.package
+    pkgs.jq
+    pkgs.libnotify
+    pkgs.coreutils
+    pkgs.gawk
+    pkgs.procps
+  ];
 
   # Emits waybar JSON. Empty text when the camera is unplugged -> module hides.
   cameraStatus = pkgs.writeShellScript "waybar-camera-status" ''
@@ -45,6 +53,59 @@ let
     v4l2-ctl -d "$dev" --set-ctrl=zoom_absolute="$next"
     pkill -RTMIN+8 waybar || true
   '';
+
+  # Monitor mirror toggle. The external is resolved dynamically as whatever is
+  # physically connected besides the built-in eDP-1 panel (any port: DP, HDMI,
+  # dock). "mirror" = laptop is the source and the external duplicates it;
+  # "external" = external alone at its native res with the laptop panel off
+  # (the laptop can't mirror a higher-res external, so we turn it off rather
+  # than mirror the other way). Hidden when no external is connected.
+  monitorStatus = pkgs.writeShellScript "waybar-monitor-status" ''
+    export PATH=${binPath}:$PATH
+    set -uo pipefail
+    mons=$(hyprctl monitors all -j 2>/dev/null) || { echo '{"text":"","tooltip":""}'; exit 0; }
+    ext=$(printf '%s' "$mons" | jq -r '[.[] | select(.name!="eDP-1")][0].name // empty')
+    if [ -z "$ext" ]; then
+      echo '{"text":"","tooltip":""}'
+      exit 0
+    fi
+    off=$(printf '%s' "$mons" | jq -r '.[] | select(.name=="eDP-1") | .disabled')
+    if [ "$off" = "true" ]; then
+      printf '{"text":"DISP: external","tooltip":"%s only, laptop off • click to mirror","class":"external"}\n' "$ext"
+    else
+      printf '{"text":"DISP: mirror","tooltip":"Mirrored to %s (laptop is main) • click for external-only","class":"mirror"}\n' "$ext"
+    fi
+  '';
+
+  # Toggles the two states, then refreshes the bar (SIGRTMIN+9). NB: re-enabling
+  # eDP-1 and attaching the mirror in a single `hyprctl --batch` silently leaves
+  # eDP-1 asleep (verified Hyprland quirk for a software disable -> enable, with
+  # no hardware reconnect event). So each direction uses separate commands, in a
+  # safe order, and the wake path waits until eDP-1 is actually on first.
+  monitorToggle = pkgs.writeShellScript "waybar-monitor-toggle" ''
+    export PATH=${binPath}:$PATH
+    set -uo pipefail
+    mons=$(hyprctl monitors all -j 2>/dev/null) || exit 0
+    ext=$(printf '%s' "$mons" | jq -r '[.[] | select(.name!="eDP-1")][0].name // empty')
+    [ -z "$ext" ] && { notify-send "Display" "No external monitor connected"; exit 0; }
+    off=$(printf '%s' "$mons" | jq -r '.[] | select(.name=="eDP-1") | .disabled')
+    if [ "$off" = "true" ]; then
+      # external-only -> mirror: wake the laptop first, wait until it is really
+      # on, then point the external's mirror at it.
+      hyprctl keyword monitor "eDP-1,preferred,auto,1.25"
+      for _ in $(seq 10); do
+        [ "$(hyprctl monitors all -j | jq -r '.[]|select(.name=="eDP-1")|.disabled')" = "false" ] && break
+        sleep 0.1
+      done
+      hyprctl keyword monitor "$ext,preferred,auto,1,mirror,eDP-1"
+    else
+      # mirror -> external-only: stop the external mirroring first, then turn
+      # the laptop panel off (never disable a monitor still being mirrored).
+      hyprctl keyword monitor "$ext,preferred,auto,1"
+      hyprctl keyword monitor "eDP-1,disable"
+    fi
+    pkill -RTMIN+9 waybar || true
+  '';
 in
 {
   programs.waybar = {
@@ -66,6 +127,7 @@ in
         ];
         modules-center = [ "clock" ];
         modules-right = [
+          "custom/monitor"
           "pulseaudio"
           "cpu"
           "memory"
@@ -145,6 +207,16 @@ in
           tooltip = true;
         };
 
+        "custom/monitor" = {
+          exec = "${monitorStatus}";
+          return-type = "json";
+          interval = 2;
+          signal = 9;
+          format = "{}";
+          on-click = "${monitorToggle}";
+          tooltip = true;
+        };
+
         idle_inhibitor = {
           format = "{icon}";
           "format-icons" = {
@@ -186,6 +258,7 @@ in
       #battery,
       #bluetooth,
       #custom-camera,
+      #custom-monitor,
       #idle_inhibitor,
       #tray {
         background-color: ${base00};
@@ -220,6 +293,11 @@ in
       #custom-camera.fov95 { color: ${base0B}; }
       #custom-camera.fov78 { color: ${base0A}; }
       #custom-camera.fov65 { color: ${base09}; }
+
+      /* display: mirror (magenta) vs external-only / laptop off (orange) */
+      #custom-monitor { color: ${base0E}; }
+      #custom-monitor.mirror   { color: ${base0E}; }
+      #custom-monitor.external { color: ${base09}; }
 
       #battery.warning  { color: ${base0A}; }
       #battery.critical { color: ${base08}; }

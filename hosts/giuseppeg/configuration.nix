@@ -96,6 +96,14 @@
   services.udev.extraRules = ''
     	ACTION=="add", SUBSYSTEM=="usb", ATTR{power/control}="on"
     	ACTION=="add", SUBSYSTEM=="pci", ATTR{power/control}="on"
+
+    	# Anker PowerConf C200: re-apply a default FOV each time the camera
+    	# (re)connects. It's a fixed lens — "FOV" is the UVC zoom_absolute crop
+    	# (100 = ~95° widest .. 171 = ~65° tightest, good for "just my face").
+    	# The control resets to default whenever the camera loses USB power
+    	# (e.g. a dock replug), so re-apply on every "add". index==0 selects the
+    	# capture node, not the metadata node. Change 171 to set a different default.
+    	ACTION=="add", SUBSYSTEM=="video4linux", ATTR{index}=="0", ATTRS{idVendor}=="291a", ATTRS{idProduct}=="3369", RUN+="${pkgs.v4l-utils}/bin/v4l2-ctl --device=$devnode --set-ctrl=zoom_absolute=171"
   '';
 
   # Thunderbolt / USB4 device manager (boltd).

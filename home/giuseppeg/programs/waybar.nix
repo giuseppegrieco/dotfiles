@@ -1,5 +1,51 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  # The Anker PowerConf C200 has no motor; "FOV" is just the UVC zoom_absolute
+  # control (100 = widest .. 400 = tightest). We expose three presets, derived
+  # from the camera's native ~95° at zoom 100:
+  #   FOV 95° -> zoom 100  (native, widest)
+  #   FOV 78° -> zoom 135  (mid)
+  #   FOV 65° -> zoom 171  (tightest of the three; good for "just my face")
+  # Tweak these zoom numbers to taste — the FOV labels are nominal.
+  cameraDev = "/dev/v4l/by-id/usb-Anker_PowerConf_C200_*-video-index0";
+  binPath = lib.makeBinPath [ pkgs.v4l-utils pkgs.coreutils pkgs.gawk pkgs.procps ];
+
+  # Emits waybar JSON. Empty text when the camera is unplugged -> module hides.
+  cameraStatus = pkgs.writeShellScript "waybar-camera-status" ''
+    export PATH=${binPath}:$PATH
+    set -uo pipefail
+    dev=$(ls ${cameraDev} 2>/dev/null | head -n1 || true)
+    if [ -z "$dev" ]; then
+      echo '{"text":"","tooltip":""}'
+      exit 0
+    fi
+    zoom=$(v4l2-ctl -d "$dev" --get-ctrl=zoom_absolute 2>/dev/null | awk -F': ' '{print $2}')
+    zoom=''${zoom:-100}
+    if   [ "$zoom" -ge 153 ]; then fov=65
+    elif [ "$zoom" -ge 118 ]; then fov=78
+    else                           fov=95
+    fi
+    printf '{"text":"FOV: %s°","tooltip":"Anker C200 — FOV %s° (zoom %s) • click to cycle 95/78/65","class":"fov%s"}\n' "$fov" "$fov" "$zoom" "$fov"
+  '';
+
+  # Narrows the FOV on each click, wrapping back to widest. Then nudges waybar
+  # (SIGRTMIN+8) so the label updates instantly instead of waiting for the poll.
+  cameraToggle = pkgs.writeShellScript "waybar-camera-toggle" ''
+    export PATH=${binPath}:$PATH
+    set -uo pipefail
+    dev=$(ls ${cameraDev} 2>/dev/null | head -n1 || true)
+    [ -z "$dev" ] && exit 0
+    zoom=$(v4l2-ctl -d "$dev" --get-ctrl=zoom_absolute 2>/dev/null | awk -F': ' '{print $2}')
+    zoom=''${zoom:-100}
+    if   [ "$zoom" -ge 153 ]; then next=100   # 65 -> 95
+    elif [ "$zoom" -ge 118 ]; then next=171   # 78 -> 65
+    else                           next=135   # 95 -> 78
+    fi
+    v4l2-ctl -d "$dev" --set-ctrl=zoom_absolute="$next"
+    pkill -RTMIN+8 waybar || true
+  '';
+in
 {
   programs.waybar = {
     enable = true;
@@ -16,6 +62,7 @@
           "hyprland/workspaces"
           "network"
           "bluetooth"
+          "custom/camera"
         ];
         modules-center = [ "clock" ];
         modules-right = [
@@ -88,6 +135,16 @@
           "tooltip-format-connected" = "{device_enumerate}";
         };
 
+        "custom/camera" = {
+          exec = "${cameraStatus}";
+          return-type = "json";
+          interval = 3;
+          signal = 8;
+          format = "{}";
+          on-click = "${cameraToggle}";
+          tooltip = true;
+        };
+
         idle_inhibitor = {
           format = "{icon}";
           "format-icons" = {
@@ -128,6 +185,7 @@
       #memory,
       #battery,
       #bluetooth,
+      #custom-camera,
       #idle_inhibitor,
       #tray {
         background-color: ${base00};
@@ -156,6 +214,12 @@
       #memory { color: ${base09}; }
       #bluetooth { color: ${base0C}; }
       #idle_inhibitor { color: ${base0D}; }
+
+      /* camera FOV: green (wide) -> yellow (mid) -> orange (tight) */
+      #custom-camera { color: ${base0C}; }
+      #custom-camera.fov95 { color: ${base0B}; }
+      #custom-camera.fov78 { color: ${base0A}; }
+      #custom-camera.fov65 { color: ${base09}; }
 
       #battery.warning  { color: ${base0A}; }
       #battery.critical { color: ${base08}; }

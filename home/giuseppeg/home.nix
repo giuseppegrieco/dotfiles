@@ -153,6 +153,7 @@
     go
     golangci-lint
     goreleaser
+    zig
     nodejs
     pnpm
     python3
@@ -171,6 +172,7 @@
     taplo
     rust-analyzer
     gopls
+    zls
     basedpyright
     marksman
     elixir-ls

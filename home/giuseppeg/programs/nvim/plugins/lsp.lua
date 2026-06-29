@@ -7,7 +7,7 @@ return {
 			"lua_ls", "nixd", "clangd", "cmake", "bashls",
 			"html", "cssls", "jsonls", "eslint",
 			"ts_ls", "yamlls", "taplo",
-			"rust_analyzer", "gopls",
+			"rust_analyzer", "gopls", "zls",
 			"basedpyright", "ruff",
 			"marksman", "elixirls",
 			"jdtls",

@@ -53,6 +53,7 @@
     ./programs/direnv.nix
     ./programs/dunst.nix
     ./programs/git.nix
+    ./programs/gpg.nix
     ./programs/hyprlock.nix
     ./programs/firefox.nix
     ./programs/hyprland.nix

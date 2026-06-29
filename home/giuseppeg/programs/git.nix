@@ -8,11 +8,11 @@
       user = {
         name = "Giuseppe Grieco";
         email = "g.grieco1997@gmail.com";
-      };
 
-      signing = {
-        signByDefault = true;
-        key = "8EFBA187CF5F6515";
+        signing = {
+          signByDefault = true;
+          key = "8EFBA187CF5F6515";
+        };
       };
 
       init.defaultBranch = "main";

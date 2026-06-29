@@ -21,6 +21,12 @@
         user = "git";
         identityFile = "~/.ssh/id_ed25519_github";
       };
+
+      "codeberg.org" = {
+        hostname = "codeberg.org";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519_codeberg";
+      };
     };
   };
 }

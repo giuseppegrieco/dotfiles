@@ -8,12 +8,11 @@
       user = {
         name = "Giuseppe Grieco";
         email = "g.grieco1997@gmail.com";
-
-        signing = {
-          signByDefault = true;
-          key = "8EFBA187CF5F6515";
-        };
+        signingkey = "8EFBA187CF5F6515";
       };
+
+      commit.gpgsign = true;
+      tag.gpgsign = true;
 
       init.defaultBranch = "main";
       pull.rebase = true;

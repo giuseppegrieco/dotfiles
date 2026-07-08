@@ -53,6 +53,8 @@ in
         vscjava.vscode-gradle
         vscjava.vscode-java-dependency
 
+        mathiasfrohlich.kotlin
+
         esbenp.prettier-vscode
         foxundermoon.shell-format
 

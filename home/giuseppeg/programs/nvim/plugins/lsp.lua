@@ -10,7 +10,7 @@ return {
 			"rust_analyzer", "gopls", "zls",
 			"basedpyright", "ruff",
 			"marksman", "elixirls",
-			"jdtls",
+			"jdtls", "kotlin_language_server",
 		}
 
 		vim.lsp.config("clangd", {

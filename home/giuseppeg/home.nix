@@ -110,6 +110,7 @@
     discord
     slack
     obs-studio
+    jetbrains.idea-oss
 
     valgrind
     strace
@@ -161,6 +162,7 @@
     poetry
     elixir
     jdk
+    kotlin
     maven
     gradle
 
@@ -178,12 +180,14 @@
     elixir-ls
     cmake-language-server
     jdt-language-server
+    kotlin-language-server
 
     stylua
     prettierd
     shfmt
     ruff
     google-java-format
+    ktfmt
 
     gnumake
     tree-sitter

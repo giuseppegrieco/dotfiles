@@ -13,6 +13,7 @@ return {
 			go              = { "gofmt" },
 			zig             = { "zigfmt" },
 			java            = { "google-java-format" },
+			kotlin          = { "ktfmt" },
 			toml            = { "taplo" },
 			javascript      = { "prettierd", "prettier", stop_after_first = true },
 			typescript      = { "prettierd", "prettier", stop_after_first = true },

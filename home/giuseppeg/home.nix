@@ -110,7 +110,6 @@
     discord
     slack
     obs-studio
-    jetbrains.idea-oss
 
     valgrind
     strace

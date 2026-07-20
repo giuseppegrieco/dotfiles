@@ -36,6 +36,17 @@ let
       waybar >/dev/null 2>&1 &
     }
 
+    # Re-enable eDP-1 and wait until it is really on before doing anything else:
+    # a software disable -> enable otherwise leaves this panel asleep (black).
+    wake_edp() {
+      hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"
+      for _ in $(seq 20); do
+        [ "$(hyprctl monitors all -j | ${pkgs.jq}/bin/jq -r '.[] | select(.name == "eDP-1") | .disabled')" = false ] && break
+        sleep 0.1
+      done
+      hyprctl dispatch dpms on eDP-1
+    }
+
     lock() {
       pgrep hyprlock >/dev/null || hyprlock &
       if on_power; then
@@ -56,8 +67,7 @@ let
     }
 
     open() {
-      hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"
-      hyprctl dispatch dpms on eDP-1
+      wake_edp
       refresh
       hyprctl dispatch moveworkspacetomonitor 1 eDP-1
       hyprctl dispatch focusmonitor eDP-1
@@ -68,11 +78,17 @@ let
       ${pkgs.socat}/bin/socat -u "UNIX-CONNECT:$sock" - 2>/dev/null | while read -r ev; do
         case "$ev" in
           monitorremoved\>\>*)
-            if lid_closed; then
-              external || { hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"; lock; }
-            else
-              refresh
-            fi
+            case "$ev" in
+              *eDP*) : ;;
+              *)
+                if lid_closed; then
+                  wake_edp
+                  lock
+                else
+                  refresh
+                fi
+                ;;
+            esac
             ;;
           monitoradded\>\>*)
             case "$ev" in *eDP*) : ;; *) refresh ;; esac

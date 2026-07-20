@@ -9,7 +9,7 @@ let
   editShot = "swappy -f ${latest}";
   copyShot = "wl-copy < ${latest} && notify-send 'Screenshot copied' 'Copied to clipboard'";
 
-  lid = pkgs.writeShellScript "hypr-lid" ''
+  lid = pkgs.writeShellScript "hypr-display" ''
     on_power() {
       [ "$(cat /sys/class/power_supply/AC/online 2>/dev/null)" = 1 ] && return 0
       case "$(cat /sys/class/power_supply/BAT0/status 2>/dev/null)" in
@@ -26,6 +26,8 @@ let
       return 1
     }
 
+    lid_closed() { grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null; }
+
     refresh() {
       pkill waybar 2>/dev/null
       pkill hyprpaper 2>/dev/null
@@ -34,12 +36,7 @@ let
       waybar >/dev/null 2>&1 &
     }
 
-    close() {
-      if on_power && external; then
-        hyprctl keyword monitor "eDP-1, disable"
-        refresh
-        return
-      fi
+    lock() {
       pgrep hyprlock >/dev/null || hyprlock &
       if on_power; then
         hyprctl dispatch dpms off eDP-1
@@ -49,16 +46,46 @@ let
       fi
     }
 
-    case "$1" in
-      open)
-        hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"
-        hyprctl dispatch dpms on eDP-1
+    close() {
+      if on_power && external; then
+        hyprctl keyword monitor "eDP-1, disable"
         refresh
-        ;;
-      boot)
-        grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null && close
-        ;;
-      *) close ;;
+      else
+        lock
+      fi
+    }
+
+    open() {
+      hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"
+      hyprctl dispatch dpms on eDP-1
+      refresh
+      hyprctl dispatch moveworkspacetomonitor 1 eDP-1
+      hyprctl dispatch focusmonitor eDP-1
+    }
+
+    watch() {
+      sock="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+      ${pkgs.socat}/bin/socat -u "UNIX-CONNECT:$sock" - 2>/dev/null | while read -r ev; do
+        case "$ev" in
+          monitorremoved*)
+            if lid_closed; then
+              external || { hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"; lock; }
+            else
+              refresh
+            fi
+            ;;
+          monitoradded*)
+            case "$ev" in *eDP*) : ;; *) refresh ;; esac
+            ;;
+        esac
+      done
+    }
+
+    case "$1" in
+      open) open ;;
+      close) close ;;
+      boot) lid_closed && close ;;
+      watch) watch ;;
     esac
   '';
 in
@@ -72,6 +99,7 @@ in
         "hyprpaper"
         "systemctl --user start hyprpolkitagent"
         "${lid} boot"
+        "${lid} watch"
       ];
       "$mod" = "SUPER";
       "$terminal" = "kitty";

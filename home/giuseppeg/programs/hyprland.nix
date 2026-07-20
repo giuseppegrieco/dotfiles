@@ -67,14 +67,14 @@ let
       sock="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
       ${pkgs.socat}/bin/socat -u "UNIX-CONNECT:$sock" - 2>/dev/null | while read -r ev; do
         case "$ev" in
-          monitorremoved*)
+          monitorremoved\>\>*)
             if lid_closed; then
               external || { hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"; lock; }
             else
               refresh
             fi
             ;;
-          monitoradded*)
+          monitoradded\>\>*)
             case "$ev" in *eDP*) : ;; *) refresh ;; esac
             ;;
         esac

@@ -26,12 +26,9 @@ let
       return 1
     }
 
-    # waybar/hyprpaper size their surfaces to the outputs alive at launch; after
-    # a layout change they must be re-laid-out or the bar/wallpaper stay sized
-    # for the old geometry (off-center on the external).
     refresh() {
-      pkill -x waybar 2>/dev/null
-      pkill -x hyprpaper 2>/dev/null
+      pkill waybar 2>/dev/null
+      pkill hyprpaper 2>/dev/null
       sleep 0.2
       hyprpaper >/dev/null 2>&1 &
       waybar >/dev/null 2>&1 &
@@ -43,11 +40,11 @@ let
         refresh
         return
       fi
-      pgrep -x hyprlock >/dev/null || hyprlock &
+      pgrep hyprlock >/dev/null || hyprlock &
       if on_power; then
         hyprctl dispatch dpms off eDP-1
       else
-        for _ in $(seq 40); do pgrep -x hyprlock >/dev/null && break; sleep 0.05; done
+        for _ in $(seq 40); do pgrep hyprlock >/dev/null && break; sleep 0.05; done
         systemctl suspend
       fi
     }

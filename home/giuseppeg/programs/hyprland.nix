@@ -30,9 +30,11 @@ let
     # a layout change they must be re-laid-out or the bar/wallpaper stay sized
     # for the old geometry (off-center on the external).
     refresh() {
-      pkill -USR2 waybar 2>/dev/null
+      pkill -x waybar 2>/dev/null
       pkill -x hyprpaper 2>/dev/null
+      sleep 0.2
       hyprpaper >/dev/null 2>&1 &
+      waybar >/dev/null 2>&1 &
     }
 
     close() {

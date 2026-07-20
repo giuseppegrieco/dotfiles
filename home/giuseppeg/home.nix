@@ -58,6 +58,7 @@
     ./programs/firefox.nix
     ./programs/hyprland.nix
     ./programs/hyprpaper.nix
+    ./programs/kanshi.nix
     ./programs/kitty.nix
     ./programs/nvim.nix
     ./programs/rofi.nix
@@ -141,6 +142,9 @@
     slurp
     swappy
     wl-clipboard
+
+    nwg-displays
+    wlr-randr
 
     gcc
     cmake

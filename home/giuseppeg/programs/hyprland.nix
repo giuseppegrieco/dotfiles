@@ -8,6 +8,24 @@ let
   takeArea = "grim -g \"$(slurp)\" ${savePath} && notify-send 'Screenshot saved' 'Region captured'";
   editShot = "swappy -f ${latest}";
   copyShot = "wl-copy < ${latest} && notify-send 'Screenshot copied' 'Copied to clipboard'";
+
+  clamshell = pkgs.writeShellScript "hypr-clamshell" ''
+    lid_closed() {
+      grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null
+    }
+
+    external_connected() {
+      for status in /sys/class/drm/card*-*/status; do
+        case "$status" in *eDP*) continue ;; esac
+        [ "$(cat "$status" 2>/dev/null)" = connected ] && return 0
+      done
+      return 1
+    }
+
+    if lid_closed && external_connected; then
+      hyprctl keyword monitor "eDP-1, disable"
+    fi
+  '';
 in
 {
   wayland.windowManager.hyprland = {
@@ -18,6 +36,7 @@ in
         "waybar"
         "hyprpaper"
         "systemctl --user start hyprpolkitagent"
+        "${clamshell}"
       ];
       "$mod" = "SUPER";
       "$terminal" = "kitty";
@@ -30,7 +49,7 @@ in
 
       monitor = [
         "eDP-1, preferred, auto, 1.25"
-        ", preferred, auto, 1, mirror, eDP-1"
+        ", preferred, auto, 1"
       ];
 
       general = {
@@ -132,8 +151,8 @@ in
       ];
 
       bindl = [
-        ", switch:on:Lid Switch, exec, sh -c 'grep -q ^connected /sys/class/drm/card*-DP-*/status /sys/class/drm/card*-HDMI-*/status 2>/dev/null && hyprctl --batch \"keyword monitor desc:Microstep MSI G32CQ4 E2,preferred,auto,1 ; keyword monitor eDP-1,disable\"'"
-        ", switch:off:Lid Switch, exec, hyprctl --batch \"keyword monitor eDP-1,preferred,auto,1.25 ; keyword monitor desc:Microstep MSI G32CQ4 E2,preferred,auto,1,mirror,eDP-1\""
+        ", switch:on:Lid Switch, exec, ${clamshell}"
+        ", switch:off:Lid Switch, exec, hyprctl keyword monitor eDP-1, preferred, 0x0, 1.25"
       ];
     };
   };

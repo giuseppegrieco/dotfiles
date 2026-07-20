@@ -47,11 +47,14 @@ let
       hyprctl dispatch dpms on eDP-1
     }
 
-    lock() {
+    lock_only() {
       pgrep hyprlock >/dev/null || hyprlock &
-      if on_power; then
-        hyprctl dispatch dpms off eDP-1
-      else
+      hyprctl dispatch dpms off eDP-1
+    }
+
+    lock() {
+      lock_only
+      if ! on_power; then
         for _ in $(seq 40); do pgrep hyprlock >/dev/null && break; sleep 0.05; done
         systemctl suspend
       fi
@@ -83,7 +86,7 @@ let
               *)
                 if lid_closed; then
                   wake_edp
-                  lock
+                  lock_only
                 else
                   refresh
                 fi

@@ -26,9 +26,19 @@ let
       return 1
     }
 
+    # waybar/hyprpaper size their surfaces to the outputs alive at launch; after
+    # a layout change they must be re-laid-out or the bar/wallpaper stay sized
+    # for the old geometry (off-center on the external).
+    refresh() {
+      pkill -USR2 waybar 2>/dev/null
+      pkill -x hyprpaper 2>/dev/null
+      hyprpaper >/dev/null 2>&1 &
+    }
+
     close() {
       if on_power && external; then
         hyprctl keyword monitor "eDP-1, disable"
+        refresh
         return
       fi
       pgrep -x hyprlock >/dev/null || hyprlock &
@@ -44,6 +54,7 @@ let
       open)
         hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"
         hyprctl dispatch dpms on eDP-1
+        refresh
         ;;
       boot)
         grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null && close

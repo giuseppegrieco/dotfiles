@@ -58,7 +58,6 @@
     ./programs/firefox.nix
     ./programs/hyprland.nix
     ./programs/hyprpaper.nix
-    ./programs/kanshi.nix
     ./programs/kitty.nix
     ./programs/nvim.nix
     ./programs/rofi.nix

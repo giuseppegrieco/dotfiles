@@ -9,21 +9,47 @@ let
   editShot = "swappy -f ${latest}";
   copyShot = "wl-copy < ${latest} && notify-send 'Screenshot copied' 'Copied to clipboard'";
 
-  # --check-lid also requires the lid shut (for boot); the lid bind omits it.
-  clamshell = pkgs.writeShellScript "hypr-clamshell" ''
-    external_connected() {
-      for status in /sys/class/drm/card*-*/status; do
-        case "$status" in *eDP*) continue ;; esac
-        [ "$(cat "$status" 2>/dev/null)" = connected ] && return 0
+  lid = pkgs.writeShellScript "hypr-lid" ''
+    on_power() {
+      [ "$(cat /sys/class/power_supply/AC/online 2>/dev/null)" = 1 ] && return 0
+      case "$(cat /sys/class/power_supply/BAT0/status 2>/dev/null)" in
+        Discharging | "") return 1 ;;
+      esac
+      return 0
+    }
+
+    external() {
+      for s in /sys/class/drm/card*-*/status; do
+        case "$s" in *eDP*) continue ;; esac
+        [ "$(cat "$s" 2>/dev/null)" = connected ] && return 0
       done
       return 1
     }
 
-    if [ "$1" = --check-lid ] && ! grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null; then
-      exit 0
-    fi
+    close() {
+      if on_power && external; then
+        hyprctl keyword monitor "eDP-1, disable"
+        return
+      fi
+      pgrep -x hyprlock >/dev/null || hyprlock &
+      if on_power; then
+        hyprctl dispatch dpms off eDP-1
+      else
+        for _ in $(seq 40); do pgrep -x hyprlock >/dev/null && break; sleep 0.05; done
+        systemctl suspend
+      fi
+    }
 
-    external_connected && hyprctl keyword monitor "eDP-1, disable"
+    case "$1" in
+      open)
+        hyprctl keyword monitor "eDP-1, preferred, 0x0, 1.25"
+        hyprctl dispatch dpms on eDP-1
+        ;;
+      boot)
+        grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null && close
+        ;;
+      *) close ;;
+    esac
   '';
 in
 {
@@ -35,7 +61,7 @@ in
         "waybar"
         "hyprpaper"
         "systemctl --user start hyprpolkitagent"
-        "${clamshell} --check-lid"
+        "${lid} boot"
       ];
       "$mod" = "SUPER";
       "$terminal" = "kitty";
@@ -47,7 +73,7 @@ in
       ];
 
       monitor = [
-        "eDP-1, preferred, auto, 1.25"
+        "eDP-1, preferred, 0x0, 1.25"
         ", preferred, auto, 1"
       ];
 
@@ -150,8 +176,8 @@ in
       ];
 
       bindl = [
-        ", switch:on:Lid Switch, exec, ${clamshell}"
-        ", switch:off:Lid Switch, exec, hyprctl keyword monitor eDP-1, preferred, 0x0, 1.25"
+        ", switch:on:Lid Switch, exec, ${lid} close"
+        ", switch:off:Lid Switch, exec, ${lid} open"
       ];
     };
   };

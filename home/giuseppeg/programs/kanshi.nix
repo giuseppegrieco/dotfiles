@@ -26,7 +26,7 @@
             position = "0,0";
           }
           {
-            criteria = "Microstep MSI G32CQ4 E2";
+            criteria = "Microstep MSI G32CQ4 E2 0x01010101";
             status = "enable";
             mode = "2560x1440";
             position = "1536,0";

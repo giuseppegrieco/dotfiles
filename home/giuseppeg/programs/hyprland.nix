@@ -9,11 +9,8 @@ let
   editShot = "swappy -f ${latest}";
   copyShot = "wl-copy < ${latest} && notify-send 'Screenshot copied' 'Copied to clipboard'";
 
+  # --check-lid also requires the lid shut (for boot); the lid bind omits it.
   clamshell = pkgs.writeShellScript "hypr-clamshell" ''
-    lid_closed() {
-      grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null
-    }
-
     external_connected() {
       for status in /sys/class/drm/card*-*/status; do
         case "$status" in *eDP*) continue ;; esac
@@ -22,9 +19,11 @@ let
       return 1
     }
 
-    if lid_closed && external_connected; then
-      hyprctl keyword monitor "eDP-1, disable"
+    if [ "$1" = --check-lid ] && ! grep -qi closed /proc/acpi/button/lid/*/state 2>/dev/null; then
+      exit 0
     fi
+
+    external_connected && hyprctl keyword monitor "eDP-1, disable"
   '';
 in
 {
@@ -36,7 +35,7 @@ in
         "waybar"
         "hyprpaper"
         "systemctl --user start hyprpolkitagent"
-        "${clamshell}"
+        "${clamshell} --check-lid"
       ];
       "$mod" = "SUPER";
       "$terminal" = "kitty";

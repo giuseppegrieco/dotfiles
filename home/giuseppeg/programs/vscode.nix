@@ -29,42 +29,52 @@ in
     mutableExtensionsDir = false;
 
     profiles.default = {
-      extensions = with pkgs.vscode-extensions; [
-        sumneko.lua
-        jnoortheen.nix-ide
-        llvm-vs-code-extensions.vscode-clangd
-        twxs.cmake
-        ms-vscode.cmake-tools
-        mads-hartmann.bash-ide-vscode
-        dbaeumer.vscode-eslint
-        redhat.vscode-yaml
-        tamasfe.even-better-toml
-        rust-lang.rust-analyzer
-        golang.go
-        detachhead.basedpyright
-        charliermarsh.ruff
-        ms-python.python
-        elixir-lsp.vscode-elixir-ls
+      extensions =
+        (with pkgs.vscode-extensions; [
+          sumneko.lua
+          jnoortheen.nix-ide
+          llvm-vs-code-extensions.vscode-clangd
+          twxs.cmake
+          ms-vscode.cmake-tools
+          mads-hartmann.bash-ide-vscode
+          dbaeumer.vscode-eslint
+          redhat.vscode-yaml
+          tamasfe.even-better-toml
+          rust-lang.rust-analyzer
+          golang.go
+          detachhead.basedpyright
+          charliermarsh.ruff
+          ms-python.python
+          elixir-lsp.vscode-elixir-ls
 
-        redhat.java
-        vscjava.vscode-java-debug
-        vscjava.vscode-java-test
-        vscjava.vscode-maven
-        vscjava.vscode-gradle
-        vscjava.vscode-java-dependency
+          redhat.java
+          vscjava.vscode-java-debug
+          vscjava.vscode-java-test
+          vscjava.vscode-maven
+          vscjava.vscode-gradle
+          vscjava.vscode-java-dependency
 
-        mathiasfrohlich.kotlin
+          mathiasfrohlich.kotlin
 
-        esbenp.prettier-vscode
-        foxundermoon.shell-format
+          esbenp.prettier-vscode
+          foxundermoon.shell-format
 
-        vadimcn.vscode-lldb
-        ms-python.debugpy
+          vadimcn.vscode-lldb
+          ms-python.debugpy
 
-        vscodevim.vim
+          vscodevim.vim
 
-        supermaven.supermaven
-      ];
+          supermaven.supermaven
+        ])
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            publisher = "openai";
+            name = "chatgpt";
+            version = "26.908.40401";
+            sha256 = "0i62shawwyhbmkkiwmd8gy3nffx5crk3qd05z68z0b92h3a16vab";
+            arch = "linux-x64";
+          }
+        ];
 
       userSettings = {
         "editor.formatOnSave" = true;

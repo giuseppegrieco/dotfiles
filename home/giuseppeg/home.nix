@@ -127,6 +127,7 @@
     nmap
     fastfetch
     gh
+    mise
     jq
     yq
 

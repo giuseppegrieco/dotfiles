@@ -40,6 +40,8 @@
     };
 
     initContent = ''
+      eval "$(${pkgs.mise}/bin/mise activate zsh)"
+
       # Wipe all k3s cluster state and restart the service.
       # Deletes /var/lib/rancher/k3s (workloads, PVs, secrets, etcd) — prompts first.
       k3s-reset() {

@@ -20,6 +20,9 @@
 
   networking.hostName = "giuseppeg";
 
+  # Let tools managed by Mise use their upstream prebuilt Linux binaries.
+  programs.nix-ld.enable = true;
+
   services.tlp = {
     enable = true;
     settings = {

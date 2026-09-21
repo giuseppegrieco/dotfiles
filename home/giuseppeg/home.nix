@@ -49,6 +49,12 @@
   };
   home.file."Pictures/Screenshots/.keep".text = "";
 
+  # NixOS otherwise makes Mise compile tools such as Node from source.
+  xdg.configFile."mise/config.toml".text = ''
+    [settings]
+    all_compile = false
+  '';
+
   imports = [
     ./programs/direnv.nix
     ./programs/dunst.nix
